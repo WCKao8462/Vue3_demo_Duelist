@@ -9,7 +9,7 @@
       增加產品
     </button>
   </div>
-  <table class="table mt-4">
+  <table class="table mt-4 text-white">
     <thead>
       <tr>
         <th width="120">分類</th>
@@ -117,6 +117,7 @@ export default {
       }
       this.$http[httpMethod](api, { data: this.tempProduct }).then((res) => {
         productComponent.hideModal()
+        console.log(res)
         this.getProducts()
       })
     },

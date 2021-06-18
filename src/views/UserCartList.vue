@@ -1,8 +1,8 @@
 <template>
-<div class="d-flex justify-content-around">
+  <div class="d-flex justify-content-around container-fluid my-3">
     <div class="col-6 mx-2">
       <h3 class="text-center">購物車清單</h3>
-        <table class="table align-middle mt-3">
+        <table class="table align-middle mt-3 text-white">
           <thead>
             <tr>
               <th></th>
@@ -80,7 +80,7 @@
           </div>
         </div>
     </div>
-    <div class="row justify-content-center col-6 mx-3">
+    <div class="row justify-content-center col-6 mx-3 text-white">
       <h3 class="text-center">聯絡人資訊</h3>
       <vform class="mt-3" v-slot="{ errors }" @submit="createdOrder">
         <div class="form-group">
@@ -121,6 +121,18 @@
       </vform>
     </div>
   </div>
+  <div class="footer d-flex">
+      <ul class="text-white my-3 container-fluid">
+        <li>
+          聯絡我們 :
+          <a href="mail:xxxxxx@mail.com">xxxxxx@mail.com</a>
+        </li>
+        <li>
+          電話 :
+          <a href="tel:0912345678">0912345678</a>
+        </li>
+      </ul>
+    </div>
 </template>
 
 <script>
@@ -208,3 +220,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container-fluid{
+  max-width: 1140px;
+}
+.footer {
+  background-color: #57507d;;
+  height: auto;
+}
+.footer li {
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>

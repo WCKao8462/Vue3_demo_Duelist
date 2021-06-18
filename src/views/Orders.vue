@@ -1,6 +1,6 @@
 <template>
   <loading :active="isLoading"></loading>
-    <table class="table mt-4">
+    <table class="table mt-4 text-white">
     <thead>
       <tr>
         <th width="200">建立時間</th>

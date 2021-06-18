@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <homeCarousel></homeCarousel>
+  <homeCarousel></homeCarousel>
+  <div class="container-fluid">
     <hr />
       <h3 class="text-center my-2" style="color: #fff;">商品分類</h3>
       <div class="d-flex w-100 mt-3">
@@ -18,11 +18,23 @@
     <h2 class="text-center" style="color: #fff;">熱門卡</h2>
     <productCarousel></productCarousel>
   </div>
+  <div class="footer d-flex">
+      <ul class="text-white my-3 container-fluid">
+        <li>
+          聯絡我們 :
+          <a href="mail:xxxxxx@mail.com">xxxxxx@mail.com</a>
+        </li>
+        <li>
+          電話 :
+          <a href="tel:0912345678">0912345678</a>
+        </li>
+      </ul>
+    </div>
 </template>
 
 <style scoped>
-.container {
-  margin: auto;
+.container-fluid {
+  max-width: 1140px;
 }
 .carousel-item {
   height: 500px;
@@ -66,6 +78,14 @@
   font-size: 35px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 50px;
+}
+.footer {
+  background-color: #57507d;;
+  height: auto;
+}
+.footer li {
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>
 

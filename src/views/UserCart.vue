@@ -3,45 +3,42 @@
   <div class="d-flex justify-content-end box" style="position: fixed; right: 140px; bottom: 30px; z-index: 1;">
     <cartDropdown :tempCart="cart" @delete-item="deleteCart"></cartDropdown>
   </div>
-  <div class="qq">
-    <!-- <img ref="" src="https://d28ipuewd7cdcq.cloudfront.net/assets/article/2019/09/13/yu-gi-oh-legacy_feature.jpg"
-    class="d-block qq" alt=""/> -->
-  </div>
-  <div class="row justify-content-center">
+  <div class="qq"></div>
+  <div class="d-flex justify-content-center container-fluid">
     <div class="list-group mt-4 col-lg-3">
-      <div class="sticky-top ml-3" style="top: 10px">
+      <div class="sticky-top mx-3" style="top: 10px">
         <button
-          class="list-group-item list-group-item-action text-center"
+          class="list-group-item list-group-item-action text-center text-white"
           aria-current="true"
           @click="setCard('')"
         >
           全部
         </button>
         <button
-          class="list-group-item list-group-item-action text-center"
+          class="list-group-item list-group-item-action text-center text-white"
           aria-current="true"
-          @click="setCard('不知火')"
+          @click="setCard('怪獸')"
         >
-          不知火牌組
+          怪獸卡
         </button>
         <button
-          class="list-group-item list-group-item-action text-center"
+          class="list-group-item list-group-item-action text-center text-white"
           aria-current="true"
-          @click="setCard('魔女工坊')"
+          @click="setCard('魔法')"
         >
-          魔女工坊牌組
+          魔法卡
         </button>
         <button
-          class="list-group-item list-group-item-action text-center"
+          class="list-group-item list-group-item-action text-center text-white"
           aria-current="true"
-          @click="setCard('召喚')"
+          @click="setCard('陷阱')"
         >
-          召喚師牌組
+          陷阱卡
         </button>
       </div>
     </div>
     <div class="d-flex flex-wrap mt-4 col-lg-9">
-      <div class="mb-4 mx-1" v-for="item in filterSearch" :key="item.id">
+      <div class="mb-4 mx-2" v-for="item in filterSearch" :key="item.id">
         <div class="card" style="width: 16rem">
           <div
             style="
@@ -90,6 +87,18 @@
       </div>
     </div>
   </div>
+  <div class="footer d-flex">
+      <ul class="text-white my-3 container-fluid">
+        <li>
+          聯絡我們 :
+          <a href="mail:xxxxxx@mail.com">xxxxxx@mail.com</a>
+        </li>
+        <li>
+          電話 :
+          <a href="tel:0912345678">0912345678</a>
+        </li>
+      </ul>
+    </div>
 </template>
 
 <script>
@@ -181,7 +190,7 @@ export default {
   computed: {
     filterSearch () {
       return this.products.filter((item) => {
-        return item.title.match(this.cardName) // 返回products中滿足cardName關鍵字的資料
+        return item.category.match(this.cardName) // 返回products中滿足cardName關鍵字的資料
       })
     }
   },
@@ -193,13 +202,28 @@ export default {
 </script>
 
 <style scoped>
+.container-fluid {
+  max-width: 1140px;
+}
+.sticky-top{
+  border: 3px solid #fff;
+}
 .list-group-item{
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255, 0);
 }
 .qq{
   width: 100%;
-  min-height: 400px;
+  min-height: 500px;
   background-image: url('https://d28ipuewd7cdcq.cloudfront.net/assets/article/2019/09/13/yu-gi-oh-legacy_feature.jpg');
   background-position: center;
+  background-size: cover;
+}
+.footer {
+  background-color: #57507d;;
+  height: auto;
+}
+.footer li {
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>

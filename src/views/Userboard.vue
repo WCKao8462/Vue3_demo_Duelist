@@ -11,34 +11,8 @@
       </div>
     </div>
   </nav>
-  <div class="container-fluid mt-3 position-relative">
-    <router-view></router-view>
-  </div>
-  <div class="footer">
-      <img
-        src="https://raw.githubusercontent.com/hexschool/HTMLHWSource/master/singlePage/footerLogo.png"
-        alt="腳尾logo"
-      />
-      <ul>
-        <li>
-          聯絡我們 :
-          <a href="mail:hexschool@mail.com">hexschool@mail.com</a>
-        </li>
-        <li>
-          電話 :
-          <a href="tel:0912345678">0912345678</a>
-        </li>
-      </ul>
-    </div>
+  <router-view></router-view>
 </template>
-
-<script>
-export default {
-  created () {
-    console.log('這是nav')
-  }
-}
-</script>
 
 <style scoped>
 .container-fluid {
@@ -57,20 +31,5 @@ export default {
 }
 .bg2{
   background-color: #242220;
-}
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #22b28e;;
-  flex-wrap: wrap;
-}
-.footer img {
-  padding: 10px;
-}
-
-.footer li {
-  line-height: 1.4;
-  font-family: Arial, Helvetica, sans-serif;
 }
 </style>

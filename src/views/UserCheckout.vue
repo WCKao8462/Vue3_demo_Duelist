@@ -1,7 +1,7 @@
 <template>
-    <div class="my-5 row justify-content-center">
+  <div class="my-5 d-flex justify-content-center">
     <form class="col-md-6" @submit.prevent="payOrder">
-        <table class="table align-middle">
+        <table class="table text-white text-center">
         <thead>
         <th>品名</th>
         <th>數量</th>
@@ -22,7 +22,7 @@
         </tfoot>
         </table>
 
-        <table class="table">
+        <table class="table text-white text-center">
         <tbody>
         <tr>
             <th width="100">Email</th>
@@ -53,6 +53,18 @@
         <button class="btn btn-danger">確認付款去</button>
         </div>
     </form>
+  </div>
+  <div class="footer d-flex">
+      <ul class="text-white my-3 container-fluid">
+        <li>
+          聯絡我們 :
+          <a href="mail:xxxxxx@mail.com">xxxxxx@mail.com</a>
+        </li>
+        <li>
+          電話 :
+          <a href="tel:0912345678">0912345678</a>
+        </li>
+      </ul>
     </div>
 </template>
 
@@ -95,3 +107,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container-fluid {
+  max-width: 1140px;
+}
+.footer {
+  background-color: #57507d;;
+  height: auto;
+}
+.footer li {
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>

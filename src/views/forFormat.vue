@@ -15,21 +15,21 @@
           aria-current="true"
           @click="setCard('不知火')"
         >
-          不知火牌組
+          怪獸卡
         </button>
         <button
           class="list-group-item list-group-item-action"
           aria-current="true"
           @click="setCard('魔女工坊')"
         >
-          魔女工坊牌組
+          魔法卡
         </button>
         <button
           class="list-group-item list-group-item-action"
           aria-current="true"
           @click="setCard('召喚')"
         >
-          召喚師牌組
+          陷阱卡
         </button>
       </div>
     </div>

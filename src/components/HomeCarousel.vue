@@ -72,8 +72,7 @@ export default {
 <style scoped>
 .swiper-container2 {
   width: 100%;
-  height: auto;
-  margin-top: 20px;
+  max-height: auto;
   margin-bottom: 20px;
 }
 </style>

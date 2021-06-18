@@ -10,7 +10,7 @@
     </button>
   </div>
 
-  <table class="table mt-4">
+  <table class="table mt-4 text-white">
     <thead>
       <tr>
         <th width="150">優惠名稱</th>
