@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/0617_vue3demo/dist/'
+  publicPath: '/0618_vue3demo/dist/'
 }
