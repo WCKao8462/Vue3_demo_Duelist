@@ -1,23 +1,22 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import Home from '../views/Home.vue'
 
 const routes = [
   {
     path: '/',
-    component: () => import('../views/Userboard.vue'),
+    component: () => import('../views/front/Userboard.vue'),
     children: [
       {
-        path: 'home',
+        path: '',
         name: 'Home',
-        component: () => import('../views/UserHome.vue')
+        component: () => import('../views/front/UserHome.vue')
       },
       {
-        path: 'cart',
-        component: () => import('../views/UserCart.vue')
+        path: 'product',
+        component: () => import('../views/front/UserProduct.vue')
       },
       {
         path: 'product/:productId',
-        component: () => import('../views/UserProduct.vue'),
+        component: () => import('../views/front/UserProductDetail.vue'),
         props: (route) => {
           return {
             id: route.params.productId
@@ -26,47 +25,39 @@ const routes = [
       },
       {
         path: 'order',
-        component: () => import('../views/UserCartList.vue')
+        component: () => import('../views/front/UserCart.vue')
       },
       {
         path: 'checkout/:orderId',
-        component: () => import('../views/UserCheckout.vue')
+        component: () => import('../views/front/UserCheckout.vue')
       },
       {
         path: 'test',
-        component: () => import('../views/CardTest.vue')
+        component: () => import('../views/front/UserCouponGame.vue')
       }
     ]
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views//front/Login.vue')
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import('../views/Dashboard.vue'),
+    component: () => import('../views/back/Dashboard.vue'),
     children: [
       {
         path: 'products',
-        component: () => import('../views/Products.vue')
+        component: () => import('../views/back/Products.vue')
       },
       {
         path: 'coupons',
-        component: () => import('../views/Coupons.vue')
+        component: () => import('../views/back/Coupons.vue')
       },
       {
         path: 'orders',
-        component: () => import('../views/Orders.vue')
+        component: () => import('../views/back/Orders.vue')
       }
     ]
   },
