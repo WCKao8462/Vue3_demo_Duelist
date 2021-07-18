@@ -1,76 +1,95 @@
 <template>
-  <loading :active="isLoading"></loading>
-  <table class="table mt-4 text-white m-auto mb-5" style="max-width: 1140px">
-    <thead>
-      <tr>
-        <th width="150">訂單id</th>
-        <th width="200">建立時間</th>
-        <th width="150">訂單金額</th>
-        <th width="150">是否付款</th>
-        <td width="200">付款時間</td>
-        <th width="150">查看詳細內容</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in orders" :key="item.id">
-        <td>{{ item.id }}</td>
-        <td>{{ dateTransform(item.create_at) }}</td>
-        <td>{{ item.total }}</td>
-        <td>
-          <span class="text-success" v-if="item.is_paid">付款完成</span>
-          <span class="text-danger" v-else>尚未付款</span>
-        </td>
-        <td>
-          <span v-if="item.paid_date">
-            {{ dateTransform(item.paid_date) }}
-          </span>
-          <span v-else></span>
-        </td>
-        <td>
-          <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm">
-              詳細資料
-            </button>
-            <button class="btn btn-outline-danger btn-sm" @click="delModal(item.id)">
-              刪除訂單
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <loadingCustom :tempIsLoading="isLoading"></loadingCustom>
+  <div class="container">
+    <table class="table mt-4 text-white m-auto mb-5 text-center" style="min-width: 800px;">
+      <thead>
+        <tr class="fs-5 text-info py-4">
+          <th width="200" class="py-4">訂單ID</th>
+          <th width="200" class="py-4">建立時間</th>
+          <th width="100" class="py-4">訂單金額</th>
+          <th width="100" class="py-4">是否付款</th>
+          <td width="200" class="py-4">付款時間</td>
+          <th width="200" class="py-4">查看詳細內容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in ordersAdmin" :key="item.id">
+          <td class="py-3">{{ item.id }}</td>
+          <td class="py-3">{{ dateTransform(item.create_at) }}</td>
+          <td class="py-3">{{ item.total }}</td>
+          <td class="py-3">
+            <span class="text-success" v-if="item.is_paid">付款完成</span>
+            <span class="text-danger" v-else>尚未付款</span>
+          </td>
+          <td class="py-3">
+            <span v-if="item.paid_date">
+              {{ dateTransform(item.paid_date) }}
+            </span>
+            <span v-else></span>
+          </td>
+          <td class="py-3">
+            <div class="btn-group">
+              <button class="btn btn-outline-primary btn-md mx-2" @click="openModal(item)">
+                詳細資料
+              </button>
+              <button class="btn btn-outline-danger btn-md mx-2" @click="delModal(item.id)">
+                刪除訂單
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination :pages="pagination" @emit-pages="getOrders"></pagination>
+  </div>
+  <orderModal ref="orderModal" :order="tempOrder"></orderModal>
   <delModal ref="delModal" @delete-item="deleteOrder"></delModal>
 </template>
 
 <script>
+import loadingCustom from '../../components/front/LoadingCustom.vue'
+import orderModal from '../../components/back/OrderModal.vue'
 import delModal from '../../components/back/DelModal.vue'
+import pagination from '../../components/Pagination.vue'
 
 export default {
   data () {
     return {
-      orders: {},
-      isLoading: false,
       isDelete: false,
-      deletedID: ''
+      deletedID: '',
+      tempOrder: {}
     }
   },
   components: {
-    delModal
+    loadingCustom,
+    orderModal,
+    delModal,
+    pagination
+  },
+  inject: ['emitter'],
+  computed: {
+    isLoading () {
+      return this.$store.state.isLoading
+    },
+    ordersAdmin () {
+      return this.$store.state.ordersAdmin
+    },
+    pagination () {
+      return this.$store.state.pagination
+    }
   },
   methods: {
-    getOrders () {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders`
-      this.isLoading = true
-      this.$http.get(api).then((res) => {
-        if (res.data.success) {
-          this.orders = res.data.orders
-          this.isLoading = false
-        }
-      })
+    getOrders (page) {
+      this.$store.dispatch('getOrdersAdmin', page)
     },
     dateTransform (time) {
       const d = new Date(time * 1000).toLocaleString()
       return d
+    },
+    openModal (item) {
+      this.tempOrder = { ...item }
+      const orderComponent = this.$refs.orderModal
+      orderComponent.showModal()
     },
     delModal (id) {
       this.deletedID = id
@@ -79,8 +98,8 @@ export default {
     },
     deleteOrder (isDelete) {
       this.isDelete = isDelete
+      this.$store.dispatch('updateLoading', true)
       const orderComponent = this.$refs.delModal
-      this.isLoading = true
       if (this.isDelete) {
         const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${this.deletedID}`
         this.$http.delete(api).then((res) => {
@@ -88,9 +107,13 @@ export default {
           this.isDelete = false
           this.deletedID = ''
           this.getOrders()
-          alert('刪除成功')
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '刪除成功'
+          })
         })
       }
+      this.$store.dispatch('updateLoading', false)
     }
   },
   created () {
@@ -98,3 +121,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container{
+  max-width: 1140px;
+}
+@media (max-width:768px) {
+  .container{
+    overflow-x: scroll;
+  }
+}
+</style>

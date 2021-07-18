@@ -6,7 +6,7 @@
           <h5 class="modal-title" id="exampleModalLabel">
             <span>新增優惠券</span>
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -61,6 +61,14 @@
 import modalMixin from '@/mixins/ModalMixin'
 
 export default {
+  data () {
+    return {
+      modal: {},
+      tempCoupon: {
+        due_date: new Date(2021, 9, 20).getTime() / 1000
+      }
+    }
+  },
   props: {
     coupon: {
       type: Object,
@@ -72,14 +80,6 @@ export default {
       this.tempCoupon = this.coupon
     }
   },
-  mixins: [modalMixin],
-  data () {
-    return {
-      modal: {},
-      tempCoupon: {
-        due_date: new Date(2021, 9, 20).getTime() / 1000
-      }
-    }
-  }
+  mixins: [modalMixin]
 }
 </script>

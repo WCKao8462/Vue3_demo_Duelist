@@ -32,7 +32,7 @@ const routes = [
         component: () => import('../views/front/UserCheckout.vue')
       },
       {
-        path: 'test',
+        path: 'coupon_game',
         component: () => import('../views/front/UserCouponGame.vue')
       }
     ]

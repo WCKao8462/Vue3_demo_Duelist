@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-end box" style="position: fixed; right: 60px; bottom: 60px; z-index: 100;">
+  <div class="d-flex justify-content-end cartBtn">
     <button class="btn deck" @click="openModal()">
       <span class="badge rounded-pill bg-primary">
         <div class="fs-5">{{ cartNum }}</div>
@@ -8,7 +8,7 @@
   </div>
   <cartModal ref="cartModal"></cartModal>
   <div class="banner position-relative">
-    <div class="content text-white" style="position: absolute; top: 50%; left: 20%;">
+    <div class="bannerMessage text-white" style="position: absolute; top: 50%; left: 20%;">
         <p class="h3">賭上決鬥者的靈魂</p>
         <p class="h3">我相信我的牌組</p>
         <br>
@@ -87,8 +87,8 @@
 
 <script>
 import productCarousel from '../../components/front/ProductCarousel.vue'
-import $ from 'jquery'
 import cartModal from '../../components/front/CartModal.vue'
+import $ from 'jquery'
 
 export default {
   components: {
@@ -134,28 +134,55 @@ export default {
 </script>
 
 <style scoped>
-.banner{
-  height: 100vh;
-  background-image: url('../../assets/pic/yugioh_1.jpg');
-  background-position: center;
+.cartBtn{
+  position: fixed;
+  right: 60px;
+  bottom: 60px;
+  z-index: 100;
+}
+.deck{
+  background-image: url('../../assets/pic/deck.png');
+  height: 70px;
+  width: 70px;
   background-size: cover;
+  border-radius: 35px;
+  position: relative;
+  border: 2px solid #fff;
+}
+.deck:hover{
+  border: 2px solid red;
+}
+.badge{
+  position: absolute;
+  top: -1px;
+  right: -3px;
+}
+.banner{
+  width: 100%;
+  min-height: 600px;
+  background-image: url('../../assets/pic/yugioh_1.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
   opacity: 0.9;
   background-attachment: fixed;
 }
-
+.bannerMessage{
+  position: absolute;
+  top: 50%;
+  left: 20%;
+}
+.typeAnime {
+  width: 100%;
+  border-right: .05em solid;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 5s steps(10),
+    caret 1s steps(1) infinite;
+}
 .item{
   width: 150px;
   height: 150px;
   border-radius: 50%;
-}
-.bg-cover{
-  width: 300px;
-  height: 200px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  background-image: url('../../assets/pic/yugioh_2.jpg');
-  background-size: cover;
 }
 .cardType{
   background-color: #57507d;
@@ -177,29 +204,16 @@ export default {
   50% { border-color: transparent; }
 }
 
-.typeAnime {
-  width: 100%;
-  border-right: .05em solid;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 5s steps(10),
-    caret 1s steps(1) infinite;
-}
-.deck{
-  background-image: url('../../assets/pic/deck.png');
-  height: 70px;
-  width: 70px;
-  background-size: cover;
-  border-radius: 35px;
-  position: relative;
-  border: 2px solid #fff;
-}
-.deck:hover{
-  border: 2px solid red;
-}
-.badge{
-  position: absolute;
-  top: -1px;
-  right: -3px;
+@media (max-width: 600px){
+  .cartBtn{
+    right: 20px;
+    bottom: 20px;
+  }
+  .banner{
+    background-image: url('../../assets/pic/yugioh_1_small.jpg');
+  }
+  .bannerMessage{
+    display: none;
+  }
 }
 </style>

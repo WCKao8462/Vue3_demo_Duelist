@@ -6,7 +6,7 @@
           <h5 class="modal-title" id="exampleModalLabel">
             <span>新增產品</span>
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -101,6 +101,12 @@
 import modalMixin from '@/mixins/ModalMixin'
 
 export default {
+  data () {
+    return {
+      modal: {},
+      tempProduct: {}
+    }
+  },
   props: {
     product: {
       type: Object,
@@ -113,15 +119,7 @@ export default {
     }
   },
   mixins: [modalMixin],
-  data () {
-    return {
-      modal: {},
-      tempProduct: {}
-    }
-  },
   methods: {
-    // showModal ()
-    // hideModal ()
     uploadFile () {
       const uploadedFile = this.$refs.fileInput.files[0]
       const formData = new FormData()
@@ -134,8 +132,5 @@ export default {
       })
     }
   }
-//   mounted () {
-//     this.modal = new Modal(this.$refs.modal)
-//   }
 }
 </script>

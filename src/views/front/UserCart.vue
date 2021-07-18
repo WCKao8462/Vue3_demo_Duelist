@@ -1,6 +1,6 @@
 <template>
   <loadingCustom :tempIsLoading="isLoading"></loadingCustom>
-  <div class="container mt-5 mb-5" v-if="true">
+  <div class="container mt-5 mb-5" v-if="cartNum !== 0">
     <div class="row text-center mb-5">
       <div class="col-md-4">
         <div class="alert alert-success alert-rounded" role="alert">
@@ -140,8 +140,6 @@ defineRule('min', min)
 export default {
   data () {
     return {
-      // cart: [],
-      // isLoading: false,
       status: {
         loadingItem: ''
       },
@@ -154,8 +152,7 @@ export default {
           tel: ''
         },
         message: ''
-      },
-      CartIsEmpty: true
+      }
     }
   },
   components: {
@@ -170,6 +167,13 @@ export default {
     },
     carts () {
       return this.$store.state.cart.carts
+    },
+    cartNum () {
+      if (this.$store.state.cart.carts === undefined) {
+        return 0
+      } else {
+        return this.$store.state.cart.carts.length
+      }
     }
   },
   methods: {
@@ -188,19 +192,20 @@ export default {
         qty: tempQty
       }
       this.$http.put(url, { data: cart }).then((res) => {
-        this.$store.dispatch('updateLoading', false)
-        this.status.loadingItem = ''
         this.getCart()
+        this.status.loadingItem = ''
+        this.$store.dispatch('updateLoading', false)
       })
     },
     addCouponCode () {
+      this.$store.dispatch('updateLoading', true)
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/coupon`
       const coupon = {
         code: this.couponCode
       }
       this.$http.post(url, { data: coupon }).then((res) => {
-        console.log(res)
         this.getCart()
+        this.$store.dispatch('updateLoading', false)
       })
     },
     isRequired (value) {
@@ -211,10 +216,11 @@ export default {
       return phoneNum.test(value) ? true : '需要正確的電話號碼'
     },
     createdOrder () {
+      this.$store.dispatch('updateLoading', true)
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`
       const order = this.form
       this.$http.post(url, { data: order }).then((res) => {
-        console.log(res)
+        this.$store.dispatch('updateLoading', false)
         this.$router.push(`/checkout/${res.data.orderId}`)
       })
     },
@@ -258,22 +264,22 @@ export default {
   color: #ddd;
 }
 .form-control{
-  /* border: 1px solid #fff; */
   color: #fff;
   background-color: #000;
 }
+.card{
+  border: 2px solid #fff;
+}
 .numText{
-  max-width: 60px;
+  width: 80px;
   background-color: #000;
   color: #fff;
+  border: 1px solid #fff;
 }
 .btnNum{
   background-color:purple;
-  /* border: 2px solid #fff; */
   color: #fff;
-}
-.count{
-  text-align: center;
+  border: 1px solid #fff;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -288,22 +294,8 @@ input::-webkit-inner-spin-button {
   background-position: 50% 40%;
   background-repeat: no-repeat;
 }
-.numText{
-  width: 100px;
-  background-color: #000;
-  color: #fff;
-  border: 1px solid #fff;
-}
-.btnNum{
-  background-color:purple;
-  border: 1px solid #fff;
-  color: #fff;
-}
 .input-group{
   width: 100%;
   justify-content: center;
-}
-.card{
-  border: 2px solid #fff;
 }
 </style>

@@ -15,7 +15,7 @@
     :pagination="false"
     class="mySwiper"
   >
-    <swiper-slide v-for="item in products" :key="item.id">
+    <swiper-slide v-for="item in randomProducts" :key="item.id">
       <router-link class="nav-link" :to="`/product/${item.id}`">
         <div class="cardItem">
           <img :src="item.imageUrl" />
@@ -27,52 +27,38 @@
 </template>
 
 <script>
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
-// Import Swiper styles
 import 'swiper/swiper.scss'
-
 import 'swiper/components/effect-coverflow/effect-coverflow.min.css'
 import 'swiper/components/pagination/pagination.min.css'
-// import Swiper core and required modules
 import SwiperCore, { EffectCoverflow, Pagination } from 'swiper/core'
-// import loadingCustom from './LoadingCustom.vue'
-
-// install Swiper modules
 SwiperCore.use([EffectCoverflow, Pagination])
 
 export default {
   data () {
     return {
-      // products: {},
-      img: {},
-      tempProducts: {}
+      randomProducts: {}
     }
   },
   components: {
     Swiper,
     SwiperSlide
-    // loadingCustom
   },
   computed: {
     isLoading () {
       return this.$store.state.isLoading
-    },
-    products () {
-      return this.$store.state.products
     }
   },
   methods: {
-    getProducts () {
-      // this.$store.dispatch('updateLoading', true)
-      // const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`
-      // this.$http.get(url).then((res) => {
-      //   this.products = res.data.products
-      //   this.shuffleArray(this.products)
-      //   this.tempProducts = this.products.slice(0, 8)
-      //   this.$store.dispatch('updateLoading', false)
-      // })
-      this.$store.dispatch('getProducts')
+    getRandomProducts () {
+      this.$store.dispatch('updateLoading', true)
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`
+      this.$http.get(url).then((res) => {
+        this.randomProducts = res.data.products
+        this.shuffleArray(this.randomProducts)
+        this.randomProducts = this.randomProducts.slice(0, 8)
+        this.$store.dispatch('updateLoading', false)
+      })
     },
     shuffleArray (array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -84,7 +70,7 @@ export default {
     }
   },
   created () {
-    this.getProducts()
+    this.getRandomProducts()
   }
 }
 </script>

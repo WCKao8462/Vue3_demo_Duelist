@@ -13,10 +13,10 @@
       </div>
       <br>
       <div class="d-grid my-3">
-        <button class="btn btn-lg login my-4" type="submit">
+        <button class="btn btn-lg login my-4 fw-bolder" type="submit">
           登入
         </button>
-          <button class="btn btn-lg toHome my-3" @click="backHome">
+          <button class="btn btn-lg toHome my-3 fw-bolder" @click="backHome">
           回首頁
         </button>
       </div>
@@ -75,11 +75,11 @@ section{
   background-color: yellow;
 }
 .toHome{
-  color: green;
-  border: 1px solid green;
+  color: beige;
+  border: 1px solid beige;
 }
 .toHome:hover{
   color: #000;
-  background-color: green;
+  background-color: beige;
 }
 </style>

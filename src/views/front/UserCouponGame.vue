@@ -3,11 +3,11 @@
   <div class="container mt-5">
     <h1 class="text-warning text-center p-4">請翻開覆蓋的卡</h1>
     <div class="row mt-5 py-2">
-      <div class="col-4 d-flex justify-content-center" v-for="card in cards" :key="card.id">
-        <button type="button" class="flip-card btn" @click="YesOrNo(card)" :class="{'clickFlip': status.clickID === card.id}" :disabled="status.isFlip">
+      <div class="col-sm-4 d-flex justify-content-center pb-3" v-for="card in cards" :key="card.id">
+        <button type="button" class="flip-card btn" @click="chooseCard(card)" :class="{'clickFlip': status.clickID === card.id}" :disabled="status.isFlip">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="../../assets/pic/back.jpg" alt="Avatar" style="width: 200px; height: 290px;" />
+              <img src="../../assets/pic/back.jpg" style="width: 200px; height: 290px;" />
             </div>
             <div class="flip-card-back">
               <img :src="card.pic" alt="Avatar" style="width: 200px; height: 290px;" />
@@ -21,9 +21,12 @@
     </div>
   </div>
 </template>
-
+../public/back.jpg
 <script>
 import loadingCustom from '../../components/front/LoadingCustom.vue'
+import BlueEyesWhiteDragon from '@/assets/pic/Blue_Eyes_White_Dragon.jpg'
+import DarkMagician from '@/assets/pic/Dark_Magician.jpg'
+import RedEyesBlackDragon from '@/assets/pic/Red_Eyes_Black_Dragon.jpg'
 
 export default {
   data () {
@@ -31,29 +34,29 @@ export default {
       cards: [
         {
           id: 1,
-          pic: 'https://images.weserv.nl/?url=storage.googleapis.com/ygoprodeck.com/pics/89631141.jpg&il&w=360&h=523',
+          pic: BlueEyesWhiteDragon,
           discount: '5折',
           code: 'blueEyes'
         },
         {
           id: 2,
-          pic: 'https://images.weserv.nl/?url=storage.googleapis.com/ygoprodeck.com/pics/46986417.jpg&il&w=360&h=523',
+          pic: DarkMagician,
           discount: '65折',
           code: 'darkmagic'
         },
         {
           id: 3,
-          pic: 'https://images.weserv.nl/?url=storage.googleapis.com/ygoprodeck.com/pics/74677425.jpg&il&w=360&h=523',
+          pic: RedEyesBlackDragon,
           discount: '8折',
           code: 'redEyes'
         }
       ],
+      yourDiscount: '',
+      yourCode: '',
       status: {
         clickID: '',
         isFlip: false
-      },
-      yourDiscount: '',
-      yourCode: ''
+      }
     }
   },
   components: {
@@ -65,17 +68,7 @@ export default {
     }
   },
   methods: {
-    handlePlus () {
-      if (this.count < 99) {
-        this.count++
-      }
-    },
-    handleSub () {
-      if (this.count > 1) {
-        this.count--
-      }
-    },
-    YesOrNo (card) {
+    chooseCard (card) {
       this.status.clickID = card.id
       this.yourDiscount = card.discount
       this.yourCode = card.code

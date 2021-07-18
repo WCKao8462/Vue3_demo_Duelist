@@ -1,27 +1,27 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid" ref="collapse">
-      <router-link class="navbar-brand text-center" to="/">
-        <img src="../../assets/pic/BEWDicon2.jpg" alt="" style="height: 50px;" />
-        <p class="duelist">DUELIST</p>
-      </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <router-link class="navbar-brand text-center" to="/">
+        <img src="../../assets/pic/BEWDicon2.jpg" alt="" style="height: 50px;" />
+        <p class="homeWord">DUELIST</p>
+      </router-link>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item py-3">
             <router-link class="navbar-brand ms-4" to="/product">卡牌專區</router-link>
           </li>
           <li class="nav-item py-3">
-            <router-link class="navbar-brand ms-4" to="/test">折扣小卡</router-link>
+            <router-link class="navbar-brand ms-4" to="/coupon_game">折扣小卡</router-link>
           </li>
           <li class="nav-item py-3">
             <router-link class="navbar-brand ms-4" to="/order">結帳</router-link>
           </li>
         </ul>
         <router-link class="navbar-brand py-3 ms-4" to="/login"><i class="bi bi-person-square"></i>後台管理</router-link>
-        <form class="d-flex py-3 px-4" @submit.prevent="toOrderList(orderId)">
+        <form class="d-flex py-3 px-4 my-2" @submit.prevent="toOrderList(orderId)">
           <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
           <input class="form-control me-2 idSearch text-white" type="search" placeholder="訂單查詢" aria-label="訂單查詢" v-model="orderId" />
         </form>
@@ -111,7 +111,7 @@ export default {
 .container-fluid {
   max-width: 1140px;
 }
-.duelist{
+.homeWord{
   font-family: 'Bowlby One', cursive;
   font-size: 16px;
 }

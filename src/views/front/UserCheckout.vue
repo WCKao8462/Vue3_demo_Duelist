@@ -20,7 +20,7 @@
     </div>
     <br>
     <div class="display-4 text-center text-warning pt-5" v-if="order.is_paid">謝謝惠顧</div>
-      <form class="px-2" @submit.prevent="payOrder">
+      <form class="px-2" @submit.prevent="payOrder(order.id)">
         <div class="row">
           <div class="col-md-6">
             <div class="buyer p-3 my-3">
@@ -35,7 +35,7 @@
                 <tbody>
                   <tr v-for="item in order.products" :key="item.id">
                     <td>{{ item.product.title}}</td>
-                    <td>{{ item.qty}} / 張</td>
+                    <td>{{ item.qty}}</td>
                     <td>{{ item.final_total}}</td>
                   </tr>
                 </tbody>
@@ -103,47 +103,29 @@ import loadingCustom from '../../components/front/LoadingCustom.vue'
 export default {
   data () {
     return {
-      orderId: '',
-      order: {
-        products: {},
-        user: {},
-        is_paid: false
-      },
-      isLoading: false
     }
   },
   components: {
     loadingCustom
   },
-  methods: {
-    getOrder () {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${this.orderId}`
-      this.$http.get(url).then((res) => {
-        if (res.data.success) {
-          console.log(res)
-          this.order = res.data.order
-          this.isLoading = false
-        }
-      })
+  computed: {
+    isLoading () {
+      return this.$store.state.isLoading
     },
-    payOrder () {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`
-      this.$http.post(url).then((res) => {
-        if (res.data.success) {
-          console.log(res)
-          this.getOrder()
-          this.$store.dispatch('getCart')
-          this.isLoading = false
-        }
-      })
+    order () {
+      return this.$store.state.order
+    }
+  },
+  methods: {
+    getOrder (orderId) {
+      this.$store.dispatch('getOrder', orderId)
+    },
+    payOrder (orderId) {
+      this.$store.dispatch('payOrder', orderId)
     }
   },
   created () {
-    this.orderId = this.$route.params.orderId
-    console.log(this.orderId)
-    this.getOrder()
+    this.getOrder(this.$route.params.orderId)
   }
 }
 </script>
@@ -162,7 +144,7 @@ export default {
 }
 .buyer{
   border: 3px solid #fff;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 20px;
   background-color: rgba(50, 50, 50, 0.2);
 }
