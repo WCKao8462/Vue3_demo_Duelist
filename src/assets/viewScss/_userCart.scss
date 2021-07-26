@@ -1,0 +1,32 @@
+.container {
+  max-width: 1140px;
+}
+
+.numText {
+  width: 35%;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.cartImg {
+  width: 100px;
+  height: 100px;
+  background-size: 70%;
+  background-position: 50% 40%;
+  background-repeat: no-repeat;
+}
+.btnCustom {
+  background-color: #b3b6db;
+  color: #242220;
+  font-weight: bolder;
+  font-size: 25px;
+  &:hover {
+    background-color: #6670b7;
+    color: #fff;
+  }
+}

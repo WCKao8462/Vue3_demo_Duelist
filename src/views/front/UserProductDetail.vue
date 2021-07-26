@@ -1,51 +1,44 @@
 <template>
-  <div class="d-flex justify-content-end cartBtn">
-    <button class="btn deck" @click="openModal()">
-      <span class="badge rounded-pill bg-primary">
-        <div class="fs-5">{{ cartNum }}</div>
-      </span>
-    </button>
-  </div>
-  <cartModal ref="cartModal"></cartModal>
+  <CartBtn></CartBtn>
   <div class="container mt-5">
     <div class="row">
-      <div class="col-lg-7 p-4 text-center">
-        <img :src="product.imageUrl" class="cardImg" alt="" />
+      <div class="col-lg-5 p-2 text-center">
+        <img :src="product.imageUrl" class="p-2 cardImgInfo" alt="" />
       </div>
-      <div class="col-lg-5 text-white my-5">
+      <div class="col-lg-7 text-white my-5 p-2">
         <h1 class="fw-bolder">{{ product.title }}</h1>
         <div class="cardCategory py-1 h6 rounded-pill" :class="{
                 'monster': cardType.monsterCard.includes(product.category),
                 'spell': cardType.spellCard.includes(product.category),
                 'trap': cardType.trapCard.includes(product.category)}">{{ product.category }}</div>
         <div class="d-flex flex-row-reverse">
-          <h2 class="fw-bold">${{ product.price }}</h2>
-          <del class="mx-2">${{ product.origin_price }}</del>
+          <div class="h2 fw-bolder mx-3">${{ product.price }}</div>
+          <del class="h4 mx-3 fw-light">${{ product.origin_price }}</del>
         </div>
         <hr class="text-white" />
         <div class="description my-3 py-3">
           <h3 class="px-2 text-center">卡牌效果</h3><br>
-          <p class="px-2">{{ product.content }}</p>
+          <p class="px-2 fw-light">{{ product.content }}</p>
         </div>
         <hr class="text-white" />
         <div class="description my-3 py-3">
           <h3 class="px-2 text-center">說明</h3><br>
-          <p class="px-2">{{ product.description }}</p>
+          <p class="px-2 fw-light">{{ product.description }}</p>
         </div>
         <hr class="text-white" />
         <div class="container">
           <div class="row">
-            <div class="col-lg-6 d-flex align-items-center g-0">
-              <div class="input-group my-3">
-                <button class="input-group-text btnNum" @click="handleSub()"><i class="bi bi-dash-lg"></i></button>
+            <div class="col-sm-6 d-flex g-0 p-3">
+              <div class="input-group input-group-sm flex-nowrap">
+                <button type="button" class="input-group-text bg-primary text-dark border-white" @click="handleSub()"><i class="bi bi-dash-lg"></i></button>
                 <input size="2" type="number" class="numText text-center" aria-label="Amount (to the nearest dollar)" v-model.number="qty" max="99" min="1" />
-                <button class="input-group-text btnNum" @click="handlePlus()"><i class="bi bi-plus-lg"></i></button>
+                <button type="button" class="input-group-text bg-primary text-dark border-white" @click="handlePlus()"><i class="bi bi-plus-lg"></i></button>
               </div>
             </div>
-            <div class="p-2 col-lg-6 text-center">
-              <button type="button" class="btn btn-outline-warning btn-md border border-2 border-warning my-3 w-75" @click="addCart(id)">
+            <div class="p-2 col-sm-6 text-center p-3">
+              <button type="button" class="btn btnCustom w-100 fs-5" @click="addCart(id)">
                   <i class="fas fa-spinner fa-spin"></i>
-                  <i class="bi bi-file-plus-fill fs-4"></i>
+                  <i class="bi bi-file-plus-fill fs-5"></i>
                   加入牌組
                 </button>
             </div>
@@ -53,11 +46,23 @@
         </div>
       </div>
     </div>
+    <hr class="text-white">
+    <h2 class="text-center m-auto text-white py-3 fw-bolder">購物須知</h2>
+    <ul class="text-white mx-auto w-75 mt-4 fw-light">
+      <li class="m-3 p-1">商品下訂後3~7天組裝，組裝完後出貨時間為1~3天，商品運送時間為3~7天，一律採用黑貓寄送。</li>
+      <li class="m-3 p-1">當確認您的訂單已經付款完成，您的訂單將於付款完成後預計「3~5個工作天」出貨(不含週末及國定假日)；因商品為收到訂單後主廚依序手工製作，部分熱門品項逢節慶檔期可能會有短暫缺貨的情況發生，敬請見諒。</li>
+      <li class="m-3 p-1">本商品售出既不退貨</li>
+    </ul>
+    <hr class="text-white">
+    <h2 class="text-center m-auto text-white py-3 fw-bolder">其他卡牌</h2>
+    <p class="text-center m-auto text-white fw-light">其他人也瀏覽了以下商品...</p>
+    <ProductCarousel></ProductCarousel>
   </div>
 </template>
 
 <script>
-import cartModal from '../../components/front/CartModal.vue'
+import CartBtn from '@/components/front/CartBtn.vue'
+import ProductCarousel from '@/components/front/ProductCarousel.vue'
 
 export default {
   props: ['id'],
@@ -75,20 +80,14 @@ export default {
       }
     }
   },
+  components: {
+    CartBtn,
+    ProductCarousel
+  },
   computed: {
     isLoading () {
       return this.$store.state.isLoading
-    },
-    cartNum () {
-      if (this.$store.state.cart.carts === undefined) {
-        return 0
-      } else {
-        return this.$store.state.cart.carts.length
-      }
     }
-  },
-  components: {
-    cartModal
   },
   inject: ['emitter'],
   methods: {
@@ -127,10 +126,6 @@ export default {
       if (this.qty > 1) {
         this.qty--
       }
-    },
-    openModal () {
-      const cartComponent = this.$refs.cartModal
-      cartComponent.showModal()
     }
   },
   watch: {
@@ -148,64 +143,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.cartBtn{
-  position: fixed;
-  right: 60px;
-  bottom: 60px;
-  z-index: 100;
-}
-.deck{
-  background-image: url('../../assets/pic/deck.png');
-  height: 70px;
-  width: 70px;
-  background-size: cover;
-  border-radius: 35px;
-  position: relative;
-  border: 2px solid #fff;
-}
-.deck:hover{
-  border: 2px solid red;
-}
-.badge{
-  position: absolute;
-  top: -1px;
-  right: -3px;
-}
-.cardImg{
-  width: 50%;
-}
-.numText{
-  width: 50%;
-  background-color: #000;
-  color: #fff;
-  border: 1px solid #fff;
-}
-.btnNum{
-  background-color:purple;
-  border: 1px solid #fff;
-  color: #fff;
-}
-.input-group{
-  width: 100%;
-  justify-content: center;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.cardCategory{
-  display: inline-block;
-  padding: 5px;
-}
-.monster{
-  background-color: #b54123;
-}
-.spell{
-  background-color: #009278;
-}
-.trap{
-  background-color: #aa2476;
-}
+<style scoped lang="scss">
+@import "@/assets/viewScss/_userProductDetail";
 </style>

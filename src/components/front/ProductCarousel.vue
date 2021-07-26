@@ -1,6 +1,5 @@
 <template>
-  <!-- <loadingCustom :tempIsLoading="isLoading"></loadingCustom> -->
-  <swiper
+  <Swiper
     :effect="'coverflow'"
     :grabCursor="true"
     :centeredSlides="true"
@@ -15,15 +14,15 @@
     :pagination="false"
     class="mySwiper"
   >
-    <swiper-slide v-for="item in randomProducts" :key="item.id">
-      <router-link class="nav-link" :to="`/product/${item.id}`">
-        <div class="cardItem">
+    <SwiperSlide v-for="item in randomProducts" :key="item.id">
+      <a type="button" class="nav-link" @click="toProduct(item.id)">
+        <div class="cardItem m-0">
           <img :src="item.imageUrl" />
           <div class="seeMore">查看更多<br>More</div>
         </div>
-      </router-link>
-    </swiper-slide>
-  </swiper>
+      </a>
+    </SwiperSlide>
+  </Swiper>
 </template>
 
 <script>
@@ -58,6 +57,7 @@ export default {
         this.shuffleArray(this.randomProducts)
         this.randomProducts = this.randomProducts.slice(0, 8)
         this.$store.dispatch('updateLoading', false)
+        document.documentElement.scrollTop = 0
       })
     },
     shuffleArray (array) {
@@ -67,6 +67,12 @@ export default {
         array[i] = array[j]
         array[j] = k
       }
+    },
+    toProduct (id) {
+      this.$router.push(`/product/${id}`).then(() => {
+        window.location.reload()
+        this.getRandomProducts()
+      })
     }
   },
   created () {
@@ -75,60 +81,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.mySwiper{
-  max-width: 960px;
-  width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin: 50px auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  background-color: #212835
-}
-.swiper-slide {
-  background-position: center;
-  background-size: cover;
-  width: 250px;
-  height: 100%;
-}
-.swiper-slide img {
-  display: block;
-  width: 100%;
-}
-h2{
-  text-align: center;
-}
-.cardItem{
-  position: relative;
-  display: inline-block;
-}
-.cardItem .seeMore{
-  visibility: hidden;
-  width: 120px;
-  /* background-color: #000; */
-  color: #fff;
-  font-size: 20px;
-  text-align: center;
-  border-radius: 6px;
-  padding: 10px 20px;
-  position: absolute;
-  z-index: 1;
-  bottom: 40%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity .4s;
-}
-.cardItem:hover .seeMore{
-  visibility: visible;
-  opacity: 1;
-}
-.cardItem img{
-  opacity: 1;
-  transition: opacity .4s;
-}
-.cardItem:hover img{
-  opacity: 0.3;
-}
+<style scoped lang="scss">
+@import "@/assets/componentScss/_productCarousel";
 </style>

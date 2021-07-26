@@ -5,18 +5,18 @@
       <h1 class="h3 mb-3 font-weight-normal text-center">請先登入</h1>
       <div class="mb-2">
         <label for="inputEmail" class="sr-only my-2">帳號</label>
-        <input type="email" id="inputEmail" class="form-control bg-dark p-3 text-white" placeholder="Email address" required autofocus v-model="user.username" />
+        <input type="email" id="inputEmail" class="form-control p-3 " placeholder="Email address" required autofocus v-model="user.username" />
       </div>
       <div class="mb-4">
         <label for="inputPassword" class="sr-only my-2">密碼</label>
-        <input type="password" id="inputPassword" class="form-control bg-dark p-3 text-white" placeholder="Password" required v-model="user.password" />
+        <input type="password" id="inputPassword" class="form-control p-3 " placeholder="Password" required v-model="user.password" />
       </div>
       <br>
       <div class="d-grid my-3">
-        <button class="btn btn-lg login my-4 fw-bolder" type="submit">
+        <button type="submit" class="btn btn-outline-primary btn-lg my-4 fw-bolder">
           登入
         </button>
-          <button class="btn btn-lg toHome my-3 fw-bolder" @click="backHome">
+          <button type="button" class="btn btn-outline-light btn-lg my-3 fw-bolder" @click="backHome">
           回首頁
         </button>
       </div>
@@ -54,32 +54,6 @@ export default {
 }
 </script>
 
-<style scoped>
-section{
-  background-image: url('../../assets/pic/yugioh_2.jpg');
-  background-size: cover;
-  height: 100vh;
-  padding-top: 150px;
-}
-.container{
-  max-width: 800px;
-  background-color: rgba(20, 20, 20, 0.9);
-  margin-top:250px;
-}
-.login{
-  color: yellow;
-  border: 1px solid yellow;
-}
-.login:hover{
-  color: #000;
-  background-color: yellow;
-}
-.toHome{
-  color: beige;
-  border: 1px solid beige;
-}
-.toHome:hover{
-  color: #000;
-  background-color: beige;
-}
+<style scoped lang="scss">
+@import "@/assets/viewScss/_login";
 </style>

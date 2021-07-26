@@ -1,0 +1,62 @@
+.homeBanner {
+  width: 100%;
+  min-height: 600px;
+  background-image: url("../../assets/pic/yugioh_1.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  background-attachment: fixed;
+  @media (max-width: 600px) {
+    background-image: url("../../assets/pic/yugioh_1_small.jpg");
+  }
+}
+.bannerMessage{
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+.typeAnime {
+  width: 100%;
+  border-right: .05em solid;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 5s steps(10),
+    caret 1s steps(1) infinite;
+}
+.typeItem{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.cardType{
+  background-color: #B3B6DB;
+  min-height: 50vh;
+}
+.animated {
+  opacity: 0;
+  transition: all 1.5s;
+  transform: translateY(100px);
+}
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+.btnCustom{
+  border: 1px solid #B3B6DB;
+  color: #B3B6DB;
+  font-size: 25px;
+  font-weight: bolder;
+  &:hover{
+    background-color: #B3B6DB;
+    color: #242220;
+  }
+}
+@keyframes typing {
+  from { width: 0 }
+}
+@keyframes caret {
+  50% { border-color: transparent; }
+}

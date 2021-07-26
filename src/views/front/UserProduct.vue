@@ -1,45 +1,34 @@
 <template>
-  <div class="d-flex justify-content-end cartBtn">
-    <button class="btn deck" @click="openModal()">
-      <span class="badge rounded-pill bg-primary">
-        <div class="fs-5">{{ cartNum }}</div>
-      </span>
-    </button>
-  </div>
-  <cartModal ref="cartModal"></cartModal>
-  <div class="banner"></div>
+  <CartBtn></CartBtn>
+  <div class="productBanner"></div>
   <div class="container">
     <div class="row">
       <div class="col-md-3 pt-3 mb-3">
-        <div class="btn-group-vertical w-100 sticky-md-top" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnradio" id="allCard" autocomplete="off" checked @click="getProductsWithPages" />
-          <label class="btn my-2 allCard" for="allCard">
+        <ul class="w-100 sticky-md-top text-white text-center p-0">
+          <li type="button" class="btnTtem my-3" @click="getProductsWithPages" :class="{'active': typeName === '全部'}">
             全部<br />
             All
-          </label>
-          <input type="radio" class="btn-check" name="btnradio" id="monsterCard" autocomplete="off" @click="setCard('怪獸', '怪獸卡')" />
-          <label class="btn my-2 monsterCard" for="monsterCard">
+          </li>
+          <li type="button" class="btnTtem my-3"  @click="setCard('怪獸', '怪獸卡')" :class="{'active': typeName === '怪獸卡'}">
             怪獸卡<br />
             Monster Card
-          </label>
-          <input type="radio" class="btn-check" name="btnradio" id="spellCard" autocomplete="off" @click="setCard('魔法', '魔法卡')" />
-          <label class="btn spellCard my-2" for="spellCard">
+          </li>
+          <li type="button" class="btnTtem my-3" @click="setCard('魔法', '魔法卡')" :class="{'active': typeName === '魔法卡'}">
             魔法卡<br />
             Spell Card
-          </label>
-          <input type="radio" class="btn-check" name="btnradio" id="trapCard" autocomplete="off" @click="setCard('陷阱', '陷阱卡')" />
-          <label class="btn trapCard my-2" for="trapCard">
+          </li>
+          <li type="button" class="btnTtem my-3" @click="setCard('陷阱', '陷阱卡')" :class="{'active': typeName === '陷阱卡'}">
             陷阱卡<br />
             Trap Card
-          </label>
-        </div>
+          </li>
+        </ul>
       </div>
       <div class="col-md-9 pt-3  m-auto">
         <h2 class="text-white text-center">{{ typeName }}</h2>
         <div class="row mb-5">
           <div class="col-lg-4 col-md-6 p-3" v-for="item in filterSearch" :key="item.id">
-            <div class="card h-100 animated" >
-              <button class="cardImg" :style="{ backgroundImage: `url(${item.imageUrl})` }"  @click="toProductDetail(item.id)"></button>
+            <div class="card h-100 productAnimated" >
+              <button type="button" class="cardImg" :style="{ backgroundImage: `url(${item.imageUrl})` }"  @click="toProductDetail(item.id)"></button>
               <div class="card-body">
                 <div class="py-2 h4 text-center fw-bolder">{{ item.title }}</div>
                 <div
@@ -55,7 +44,7 @@
                   <del class="h6">$ {{ item.origin_price }}</del>
                   <div class="h5 fw-bolder">$ {{ item.price }}</div>
                 </div>
-                <button type="button" class="btn btn-outline-warning btn-md ml-auto w-100 border border-2 border-warning" @click="addCart(item.id)" :disabled="status.loadingItem === item.id">
+                <button type="button" class="btn btn-md ml-auto w-100 border border-1 btnCustom" @click="addCart(item.id)" :disabled="status.loadingItem === item.id">
                   <div class="spinner-grow spinner-grow-sm text-danger" role="status" v-if="status.loadingItem === item.id">
                     <span class="visually-hidden">Loading...</span>
                   </div>
@@ -67,15 +56,15 @@
             </div>
           </div>
         </div>
-        <pagination :pages="pagination" @emit-pages="getProductsWithPages" v-if="pageIsShown"></pagination>
+        <Pagination :pages="pagination" @emit-pages="getProductsWithPages" v-if="pageIsShown"></Pagination>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import cartModal from '../../components/front/CartModal.vue'
-import pagination from '../../components/Pagination.vue'
+import CartBtn from '@/components/front/CartBtn.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   data () {
@@ -95,8 +84,8 @@ export default {
     }
   },
   components: {
-    cartModal,
-    pagination
+    CartBtn,
+    Pagination
   },
   inject: ['emitter'],
   methods: {
@@ -112,6 +101,7 @@ export default {
     },
     toProductDetail (id) {
       this.$router.push(`/product/${id}`)
+      document.documentElement.scrollTop = 0
     },
     addCart (id) {
       this.$store.dispatch('updateLoading', true)
@@ -137,20 +127,12 @@ export default {
       this.getProducts()
       this.typeName = typeName
       this.cardName = cardName
-    },
-    openModal () {
-      const cartComponent = this.$refs.cartModal
-      cartComponent.showModal()
     }
-  },
-  openModal () {
-    const cartComponent = this.$refs.cartModal
-    cartComponent.showModal()
   },
   computed: {
     filterSearch () {
       return this.products.filter((item) => {
-        return item.category.match(this.cardName) // 返回products中滿足cardName關鍵字的資料
+        return item.category.match(this.cardName)
       })
     },
     isLoading () {
@@ -161,13 +143,6 @@ export default {
     },
     pagination () {
       return this.$store.state.pagination
-    },
-    cartNum () {
-      if (this.$store.state.cart.carts === undefined) {
-        return 0
-      } else {
-        return this.$store.state.cart.carts.length
-      }
     }
   },
   created () {
@@ -176,121 +151,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.cartBtn{
-  position: fixed;
-  right: 60px;
-  bottom: 60px;
-  z-index: 100;
-}
-.deck{
-  background-image: url('../../assets/pic/deck.png');
-  height: 70px;
-  width: 70px;
-  background-size: cover;
-  border-radius: 35px;
-  position: relative;
-  border: 2px solid #fff;
-}
-.deck:hover{
-  border: 2px solid red;
-}
-.badge{
-  position: absolute;
-  top: -1px;
-  right: -3px;
-}
-.banner{
-  width: 100%;
-  min-height: 500px;
-  background-image: url('../../assets/pic/yugioh_3.jpg');
-  background-position: center;
-  background-size: cover;
-  opacity: 0.5;
-  background-attachment: fixed;
-}
-.allCard, .monsterCard, .spellCard, .trapCard{
-  background-color: #000;
-  color: #fff;
-  border: 1px solid #fff;
-  font-weight: bold;
-  font-size: 20px;
-}
-.allCard:hover{
-  background-color: #fff;
-  color: #000;
-}
-.allCard:checked, #allCard:checked ~ .allCard{
-  background-color: #fff;
-  color: #000;
-}
-.monsterCard:hover, #monsterCard:checked ~ .monsterCard{
-  background-color: #b54123;
-}
-.spellCard:hover, #spellCard:checked ~ .spellCard{
-  background-color: #009278;
-}
-.trapCard:hover, #trapCard:checked ~ .trapCard{
-  background-color: #aa2476;
-}
-.card{
-  box-shadow: 0 4px 5px rgba(236, 234, 234, .1);
-  transition: box-shadow .3s;
-}
-.card:hover{
-  box-shadow: 0 4px 15px rgb(236, 234, 234, .8);
-}
-.card-body{
-  background-color: #000;
-  color: #fff;
-}
-.cardImg{
-  background-color: #000;
-  height: 250px;
-  background-size: 80%;
-  background-position: 50% 40%;
-  background-repeat: no-repeat;
-  transition: background-size .3s;
-}
-.cardImg:hover{
-  background-size: 125%;
-  cursor: zoom-in;
-}
-.cardCategory{
-  display: inline-block;
-  padding: 5px;
-}
-.monster{
-  background-color: #b54123;
-}
-.spell{
-  background-color: #009278;
-}
-.trap{
-  background-color: #aa2476;
-}
-.animated {
-  animation: anime;
-  animation-duration: .8s;
-}
-@keyframes anime{
-  0% {opacity: 0; transform: translateY(100px);}
-  100% {opacity: 1; transform: translateY(0);}
-}
-
-@media (max-width: 600px){
-  .cartBtn{
-    right: 20px;
-    bottom: 20px;
-  }
-  .banner{
-    display: none;
-  }
-  .allCard, .monsterCard, .spellCard, .trapCard{
-    font-size: 16px;
-  }
-  .cardCategory{
-    display: none;
-  }
-}
+<style scoped lang="scss">
+@import "@/assets/viewScss/_userProduct";
 </style>

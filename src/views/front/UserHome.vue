@@ -1,23 +1,15 @@
 <template>
-  <div class="d-flex justify-content-end cartBtn">
-    <button class="btn deck" @click="openModal()">
-      <span class="badge rounded-pill bg-primary">
-        <div class="fs-5">{{ cartNum }}</div>
-      </span>
-    </button>
-  </div>
-  <cartModal ref="cartModal"></cartModal>
-  <div class="banner position-relative">
+  <CartBtn></CartBtn>
+  <div class="homeBanner position-relative">
     <div class="bannerMessage text-white" style="position: absolute; top: 50%; left: 20%;">
-        <p class="h3">賭上決鬥者的靈魂</p>
-        <p class="h3">我相信我的牌組</p>
+        <p class="h3">賭上決鬥者的靈魂<br>我相信我的牌組</p>
         <br>
         <p class="display-6 typeAnime">我的回合!抽牌!</p>
       </div>
   </div>
   <section class="text-center container">
     <div class="row mb-4 mt-4 animated">
-      <div class="col-sm-5">
+      <div class="col-md-4">
         <div class="h2 text-info text-decoration-underline m-3 p-3 fw-bolder">關於本站</div>
         <div class="h6 lh-lg text-white m-auto p-2" style="max-width: 600px">
           我們提供你各種<br>
@@ -28,13 +20,13 @@
           成為一流的決鬥者!
         </div>
       </div>
-      <div class="col-sm-7">
-        <img class="w-100  p-3" src="../../assets/pic/kaibayugi.jpg" alt="">
+      <div class="col-md-8">
+        <img class="w-100  p-3" src="../../assets/pic/kaibayugi.jpg" alt="關於本站(代表人物海馬與遊戲)">
       </div>
     </div>
     <div class="row mb-4 mt-4 animated">
       <div class="col-sm-7">
-        <img class="w-100  p-3" src="../../assets/pic/worldwild.jpg" alt="">
+        <img class="w-100  p-3" src="../../assets/pic/worldwild.jpg" alt="你知道嗎(遊戲王現實環境)">
       </div>
       <div class="col-sm-5">
         <div class="h2 text-info text-decoration-underline m-3 p-3 fw-bolder">你知道嗎</div>
@@ -46,30 +38,30 @@
     </div>
   </section>
   <section class="cardType">
-    <div class="h2 text-center text-info text-decoration-underline pt-4 fw-bolder">卡牌種類</div>
+    <div class="h2 text-center text-dark text-decoration-underline pt-4 fw-bolder">卡牌種類</div>
     <div class="container py-5">
       <div class="row">
-        <div class="col-md-4 text-white px-4">
+        <div class="col-md-4 text-dark px-4">
           <div class="text-center">
-            <img class="item mb-2" src="../../assets/pic/BlueEyesWhiteDragon.jpg" alt="">
+            <img class="typeItem mb-2" src="../../assets/pic/Monster.jpg" alt="怪獸卡">
           </div>
-          <h3 class="py-1 f77">怪獸卡</h3>
+          <h3 class="pt-3 fw-bold text-center">怪獸卡</h3>
           <hr>
           <p>怪獸卡是戰場的主角！沒有持有任何効果的「通常怪獸」擁有特殊効果的「效果怪獸」</p>
         </div>
-        <div class="col-md-4 text-white px-4 intro">
+        <div class="col-md-4 text-dark px-4 intro">
           <div class="text-center">
-            <img class="item mb-2" src="../../assets/pic/fusion.jpg" alt="">
+            <img class="typeItem mb-2" src="../../assets/pic/Spell.jpg" alt="魔法卡">
           </div>
-          <h3 class="py-1">魔法卡</h3>
+          <h3 class="pt-3 fw-bold text-center">魔法卡</h3>
           <hr>
           <p class="display-8">發動後能夠發揮各種効果 ！在決鬥中不可或缺！</p>
         </div>
-        <div class="col-md-4 text-white px-4">
+        <div class="col-md-4 text-dark px-4">
           <div class="text-center">
-            <img class="item mb-2" src="../../assets/pic/mirrorforce.jpg" alt="">
+            <img class="typeItem mb-2" src="../../assets/pic/Trap.jpg" alt="陷阱卡">
           </div>
-          <h3 class="py-1">陷阱卡</h3>
+          <h3 class="pt-3 fw-bold text-center">陷阱卡</h3>
           <hr>
           <p>雖然陷阱卡使用的時機有所限制，但若能加以善用的話，便有機會扭轉局勢！發動陷阱智取對手！</p>
         </div>
@@ -79,34 +71,27 @@
   <section class="py-5">
     <div class="text-center">
       <div class="h2 text-center text-info p-3 text-decoration-underline fw-bolder">精選卡片</div>
-      <productCarousel></productCarousel>
-      <button class="btn btn-outline-primary mt-3 btn-lg"  @click="toProduct"><i class="bi bi-search"> 更多卡牌...</i></button>
+      <ProductCarousel></ProductCarousel>
+      <button type="button" class="btn btn-outline-light border border-2 mt-3 btn-lg fs-4 fw-bold"  @click="toProduct"><i class="bi bi-search"></i> 更多卡牌... </button>
     </div>
   </section>
 </template>
 
 <script>
-import productCarousel from '../../components/front/ProductCarousel.vue'
-import cartModal from '../../components/front/CartModal.vue'
+import ProductCarousel from '@/components/front/ProductCarousel.vue'
+import CartBtn from '@/components/front/CartBtn.vue'
 import $ from 'jquery'
 
 export default {
   components: {
-    productCarousel,
-    cartModal
-  },
-  computed: {
-    cartNum () {
-      if (this.$store.state.cart.carts === undefined) {
-        return 0
-      } else {
-        return this.$store.state.cart.carts.length
-      }
-    }
+    ProductCarousel,
+    CartBtn
   },
   methods: {
     toProduct () {
-      this.$router.push('/product')
+      this.$router.push('/product').then(() => {
+        document.documentElement.scrollTop = 0
+      })
     },
     openModal () {
       const cartComponent = this.$refs.cartModal
@@ -117,10 +102,10 @@ export default {
     this.navbarHeight = document.querySelector('.navbar').offsetHeight
     $(document).ready(function () {
       $(window).scroll(function () {
-        var scrollPos = $(window).scrollTop()
-        var windowHeight = $(window).height()
+        const scrollPos = $(window).scrollTop()
+        const windowHeight = $(window).height()
         $('.animated').each(function () {
-          var thisPos = $(this).offset().top
+          const thisPos = $(this).offset().top
           if (windowHeight * 0.8 + scrollPos >= thisPos) {
             $(this).addClass('fadeIn')
           } else {
@@ -133,87 +118,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.cartBtn{
-  position: fixed;
-  right: 60px;
-  bottom: 60px;
-  z-index: 100;
-}
-.deck{
-  background-image: url('../../assets/pic/deck.png');
-  height: 70px;
-  width: 70px;
-  background-size: cover;
-  border-radius: 35px;
-  position: relative;
-  border: 2px solid #fff;
-}
-.deck:hover{
-  border: 2px solid red;
-}
-.badge{
-  position: absolute;
-  top: -1px;
-  right: -3px;
-}
-.banner{
-  width: 100%;
-  min-height: 600px;
-  background-image: url('../../assets/pic/yugioh_1.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  opacity: 0.9;
-  background-attachment: fixed;
-}
-.bannerMessage{
-  position: absolute;
-  top: 50%;
-  left: 20%;
-}
-.typeAnime {
-  width: 100%;
-  border-right: .05em solid;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 5s steps(10),
-    caret 1s steps(1) infinite;
-}
-.item{
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-}
-.cardType{
-  background-color: #57507d;
-  min-height: 50vh;
-}
-.animated {
-  opacity: 0;
-  transition: all 1.5s;
-  transform: translateY(100px);
-}
-.fadeIn {
-  opacity: 1;
-  transform: translateY(0);
-}
-@keyframes typing {
-  from { width: 0 }
-}
-@keyframes caret {
-  50% { border-color: transparent; }
-}
-
-@media (max-width: 600px){
-  .cartBtn{
-    right: 20px;
-    bottom: 20px;
-  }
-  .banner{
-    background-image: url('../../assets/pic/yugioh_1_small.jpg');
-  }
-  .bannerMessage{
-    display: none;
-  }
-}
+<style scoped lang="scss">
+@import "@/assets/viewScss/_userHome";
 </style>

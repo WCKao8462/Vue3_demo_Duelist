@@ -21,16 +21,16 @@
 </template>
 
 <script>
-import modalMixin from '@/mixins/ModalMixin'
+import ModalMixin from '@/mixins/ModalMixin'
 
 export default {
-  mixins: [modalMixin],
   data () {
     return {
       modal: {},
       isDelete: true
     }
   },
+  mixins: [ModalMixin],
   methods: {
     comfirmDel () {
       this.$emit('delete-item', this.isDelete)

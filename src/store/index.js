@@ -103,6 +103,7 @@ export default createStore({
       axios.post(url).then((res) => {
         if (res.data.success) {
           context.dispatch('getOrder', orderId)
+          context.dispatch('getCart')
           context.commit('LOADING', false)
         }
       })

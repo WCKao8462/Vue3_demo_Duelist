@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import modalMixin from '@/mixins/ModalMixin'
+import ModalMixin from '@/mixins/ModalMixin'
 
 export default {
   data () {
@@ -49,6 +49,6 @@ export default {
       default () { return {} }
     }
   },
-  mixins: [modalMixin]
+  mixins: [ModalMixin]
 }
 </script>

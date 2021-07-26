@@ -32,7 +32,7 @@
                   </button>
                 </div>
                 <div>
-                  <button class="btn btn-outline-primary btn-sm d-block w-100">
+                  <button type="button" class="btn btn-outline-primary btn-sm d-block w-100">
                     新增圖片
                   </button>
                 </div>
@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import modalMixin from '@/mixins/ModalMixin'
+import ModalMixin from '@/mixins/ModalMixin'
 
 export default {
   data () {
@@ -113,12 +113,7 @@ export default {
       default () { return {} }
     }
   },
-  watch: {
-    product () {
-      this.tempProduct = this.product
-    }
-  },
-  mixins: [modalMixin],
+  mixins: [ModalMixin],
   methods: {
     uploadFile () {
       const uploadedFile = this.$refs.fileInput.files[0]
@@ -130,6 +125,11 @@ export default {
           this.tempProduct.imageUrl = res.data.imageUrl
         }
       })
+    }
+  },
+  watch: {
+    product () {
+      this.tempProduct = this.product
     }
   }
 }

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import modalMixin from '@/mixins/ModalMixin'
+import ModalMixin from '@/mixins/ModalMixin'
 
 export default {
   data () {
@@ -75,11 +75,11 @@ export default {
       default () { return {} }
     }
   },
+  mixins: [ModalMixin],
   watch: {
     coupon () {
       this.tempCoupon = this.coupon
     }
-  },
-  mixins: [modalMixin]
+  }
 }
 </script>

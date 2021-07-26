@@ -1,22 +1,20 @@
 <template>
-  <navbar></navbar>
-  <div class="container-fluid">
-    <div class="container-fluid mt-3 position-relative">
-      <toastMessage></toastMessage>
-      <router-view></router-view>
-    </div>
+  <Navbar></Navbar>
+  <div class="container mt-3 position-relative">
+    <ToastMessage></ToastMessage>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import navbar from '../../components/back/Navbar.vue'
+import Navbar from '@/components/back/Navbar.vue'
 import emitter from '@/methods/emitter'
-import toastMessage from '@/components/ToastMessage.vue'
+import ToastMessage from '@/components/ToastMessage.vue'
 
 export default {
   components: {
-    navbar,
-    toastMessage
+    Navbar,
+    ToastMessage
   },
   provide () {
     return {
@@ -36,8 +34,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.container-fluid{
-  max-width: 1140px;
-}
+<style scoped lang="scss">
+@import "@/assets/viewScss/_forBack";
 </style>

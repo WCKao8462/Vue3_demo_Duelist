@@ -28,6 +28,10 @@ const routes = [
         component: () => import('../views/front/UserCart.vue')
       },
       {
+        path: 'information',
+        component: () => import('../views/front/UserInformation.vue')
+      },
+      {
         path: 'checkout/:orderId',
         component: () => import('../views/front/UserCheckout.vue')
       },

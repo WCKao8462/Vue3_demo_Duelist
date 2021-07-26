@@ -1,5 +1,5 @@
 <template>
-  <loadingCustom :tempIsLoading="isLoading"></loadingCustom>
+  <LoadingCustom :tempIsLoading="isLoading"></LoadingCustom>
   <div class="container">
     <table class="table mt-4 text-white m-auto mb-5 text-center" style="min-width: 800px;">
       <thead>
@@ -29,10 +29,10 @@
           </td>
           <td class="py-3">
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-md mx-2" @click="openModal(item)">
+              <button type="button" class="btn btn-outline-primary btn-md mx-2" @click="openModal(item)">
                 詳細資料
               </button>
-              <button class="btn btn-outline-danger btn-md mx-2" @click="delModal(item.id)">
+              <button type="button" class="btn btn-outline-danger btn-md mx-2" @click="delModal(item.id)">
                 刪除訂單
               </button>
             </div>
@@ -40,17 +40,17 @@
         </tr>
       </tbody>
     </table>
-    <pagination :pages="pagination" @emit-pages="getOrders"></pagination>
+    <Pagination :pages="pagination" @emit-pages="getOrders"></Pagination>
   </div>
-  <orderModal ref="orderModal" :order="tempOrder"></orderModal>
-  <delModal ref="delModal" @delete-item="deleteOrder"></delModal>
+  <OrderModal ref="orderModal" :order="tempOrder"></OrderModal>
+  <DelModal ref="delModal" @delete-item="deleteOrder"></DelModal>
 </template>
 
 <script>
-import loadingCustom from '../../components/front/LoadingCustom.vue'
-import orderModal from '../../components/back/OrderModal.vue'
-import delModal from '../../components/back/DelModal.vue'
-import pagination from '../../components/Pagination.vue'
+import LoadingCustom from '@/components/front/LoadingCustom.vue'
+import OrderModal from '@/components/back/OrderModal.vue'
+import DelModal from '@/components/back/DelModal.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   data () {
@@ -61,10 +61,10 @@ export default {
     }
   },
   components: {
-    loadingCustom,
-    orderModal,
-    delModal,
-    pagination
+    LoadingCustom,
+    OrderModal,
+    DelModal,
+    Pagination
   },
   inject: ['emitter'],
   computed: {
@@ -122,13 +122,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.container{
-  max-width: 1140px;
-}
-@media (max-width:768px) {
-  .container{
-    overflow-x: scroll;
-  }
-}
+<style scoped lang="scss">
+@import "@/assets/viewScss/_forBack";
 </style>

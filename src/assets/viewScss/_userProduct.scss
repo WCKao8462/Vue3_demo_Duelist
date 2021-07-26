@@ -1,0 +1,95 @@
+.productBanner {
+  width: 100%;
+  min-height: 500px;
+  background-image: url("../../assets/pic/yugioh_3.jpg");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.5;
+  background-attachment: fixed;
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+.card {
+  border: 1px solid #b3b6db;
+  box-shadow: 0 10px 5px rgba(236, 234, 234, 0.1);
+  transition: box-shadow 0.3s;
+  &:hover {
+    box-shadow: 0 10px 15px rgba(236, 234, 234, 0.8);
+  }
+}
+.card-body {
+  background-color: #242220;
+  color: #fff;
+}
+.cardImg {
+  background-color: #000;
+  height: 250px;
+  background-size: 80%;
+  background-position: 50% 40%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s;
+  &:hover {
+    background-size: 125%;
+    cursor: zoom-in;
+  }
+}
+.cardCategory {
+  display: inline-block;
+  padding: 5px;
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+.monster {
+  background-color: #b54123;
+}
+.spell {
+  background-color: #009278;
+}
+.trap {
+  background-color: #aa2476;
+}
+.productAnimated {
+  animation: anime;
+  animation-duration: 0.8s;
+}
+@keyframes anime {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.btnCustom {
+  background-color: #b3b6db;
+  color: #242220;
+  font-weight: bolder;
+  font-size: 25px;
+  &:hover {
+    background-color: #6670B7;
+    color: #fff;
+  }
+}
+.btnTtem {
+  border: 2px solid #b3b6db;
+  background-color: #000;
+  color: #b3b6db;
+  font-size: 20px;
+  font-weight: bolder;
+  border-radius: 10px;
+  &:hover {
+    background-color: #6670B7;
+    color: #fff;
+  }
+}
+.active{
+  background-color: #B3B6DB;
+  color: #000;
+}
+li{
+  list-style-type:none;
+}

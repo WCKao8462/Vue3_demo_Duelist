@@ -19,8 +19,6 @@
 </template>
 
 <script>
-// :pages="{ 頁碼資訊 }"
-// @emitPages="更新頁面事件"
 export default {
   props: ['pages'],
   methods: {
@@ -31,8 +29,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.page-link{
-  background-color: #000;
-}
+<style scoped lang="scss">
+@import "@/assets/componentScss/_pagination";
 </style>

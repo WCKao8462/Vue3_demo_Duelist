@@ -1,0 +1,26 @@
+.container {
+  max-width: 960px;
+}
+.alert-rounded {
+  border-radius: 50px;
+  border: 2px solid #b3b6db;
+}
+
+.input-group {
+  width: 100%;
+  justify-content: center;
+}
+.form-control {
+  color: #fff;
+  background-color: #000;
+}
+.btnCustom {
+  background-color: #b3b6db;
+  color: #242220;
+  font-weight: bolder;
+  font-size: 25px;
+  &:hover {
+    background-color: #6670b7;
+    color: #fff;
+  }
+}

@@ -1,7 +1,7 @@
 <template>
-  <loadingCustom :tempIsLoading="isLoading"></loadingCustom>
+  <LoadingCustom :tempIsLoading="isLoading"></LoadingCustom>
   <div class="text-end">
-    <button class="btn btn-primary" type="button" @click="openModal">
+    <button type="button" class="btn btn-primary" @click="openModal">
       增加優惠券
     </button>
   </div>
@@ -29,10 +29,10 @@
         </td>
         <td class="py-3">
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-md mx-2" @click="openModal((isNew = false), item)">
+            <button type="button" class="btn btn-outline-primary btn-md mx-2" @click="openModal((isNew = false), item)">
               編輯
             </button>
-            <button class="btn btn-outline-danger btn-md mx-2" @click="delModal(item.id)">
+            <button type="button" class="btn btn-outline-danger btn-md mx-2" @click="delModal(item.id)">
               刪除
             </button>
           </div>
@@ -40,17 +40,17 @@
       </tr>
     </tbody>
   </table>
-  <pagination :pages="pagination" @emit-pages="getCoupons"></pagination>
+  <Pagination :pages="pagination" @emit-pages="getCoupons"></Pagination>
   </div>
-  <couponModal ref="couponModal" :coupon="tempCoupon" @update-coupon="updateCoupon"></couponModal>
-  <delModal ref="delModal" @delete-item="deleteProduct"></delModal>
+  <CouponModal ref="couponModal" :coupon="tempCoupon" @update-coupon="updateCoupon"></CouponModal>
+  <DelModal ref="delModal" @delete-item="deleteProduct"></DelModal>
 </template>
 
 <script>
-import loadingCustom from '../../components/front/LoadingCustom.vue'
-import couponModal from '../../components/back/CouponModal.vue'
-import delModal from '../../components/back/DelModal.vue'
-import pagination from '../../components/Pagination.vue'
+import LoadingCustom from '@/components/front/LoadingCustom.vue'
+import CouponModal from '@/components/back/CouponModal.vue'
+import DelModal from '@/components/back/DelModal.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   data () {
@@ -62,10 +62,10 @@ export default {
     }
   },
   components: {
-    loadingCustom,
-    couponModal,
-    delModal,
-    pagination
+    LoadingCustom,
+    CouponModal,
+    DelModal,
+    Pagination
   },
   inject: ['emitter'],
   computed: {
@@ -155,13 +155,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.container{
-  max-width: 1140px;
-}
-@media (max-width:768px) {
-  .container{
-    overflow-x: scroll;
-  }
-}
+<style scoped lang="scss">
+@import "@/assets/viewScss/_forBack";
 </style>

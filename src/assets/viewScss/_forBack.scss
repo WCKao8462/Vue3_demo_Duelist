@@ -1,0 +1,8 @@
+.container {
+  max-width: 1140px;
+}
+@media (max-width: 768px) {
+  .container {
+    overflow-x: scroll;
+  }
+}

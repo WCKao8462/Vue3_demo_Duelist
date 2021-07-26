@@ -1,0 +1,42 @@
+.container {
+  max-width: 1140px;
+}
+.cardImgInfo {
+  max-width: 90%;
+}
+.numText {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #fff;
+  min-height: 40px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.cardCategory {
+  display: inline-block;
+  padding: 5px;
+}
+.monster {
+  background-color: #b54123;
+}
+.spell {
+  background-color: #009278;
+}
+.trap {
+  background-color: #aa2476;
+}
+.btnCustom {
+  background-color: #b3b6db;
+  color: #242220;
+  font-weight: bolder;
+  font-size: 25px;
+  &:hover {
+    background-color: #6670b7;
+    color: #fff;
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <loadingCustom :tempIsLoading="isLoading"></loadingCustom>
+  <LoadingCustom :tempIsLoading="isLoading"></LoadingCustom>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal" data-bs-backdrop="static">
     <div class="modal-dialog mt-5">
       <div class="modal-content">
@@ -35,7 +35,7 @@
           </div>
           <br>
           <div class="d-grid">
-            <button class="btn btn-outline-warning" data-bs-dismiss="modal" @click="toOrder">結帳</button>
+            <button type="button" class="btn btnCustom" data-bs-dismiss="modal" @click="toOrder"><i class="bi bi-currency-dollar"></i> 結帳</button>
           </div>
         </div>
         <div class="px-4 py-3 text-white text-center fs-4" v-else>
@@ -47,13 +47,13 @@
 </template>
 
 <script>
-import modalMixin from '@/mixins/ModalMixin'
-import loadingCustom from './LoadingCustom.vue'
+import ModalMixin from '@/mixins/ModalMixin'
+import LoadingCustom from './LoadingCustom.vue'
 
 export default {
-  mixins: [modalMixin],
+  mixins: [ModalMixin],
   components: {
-    loadingCustom
+    LoadingCustom
   },
   computed: {
     isLoading () {
@@ -81,10 +81,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.modal-content{
-  background-color: #212835;
-  border: 3px solid #fff;
-  border-radius: 25px;
-}
+<style scoped lang="scss">
+@import "@/assets/componentScss/_cartModal";
 </style>

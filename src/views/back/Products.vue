@@ -1,7 +1,7 @@
 <template>
-  <loadingCustom :tempIsLoading="isLoading"></loadingCustom>
+  <LoadingCustom :tempIsLoading="isLoading"></LoadingCustom>
   <div class="text-end mt-3">
-    <button class="btn btn-primary" type="button" @click="openModal((isNew = true))">
+    <button type="button" class="btn btn-primary" @click="openModal((isNew = true))">
       增加產品
     </button>
   </div>
@@ -29,10 +29,10 @@
           </td>
           <td class="py-3">
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-md mx-2" @click="openModal((isNew = false), item)">
+              <button type="button" class="btn btn-outline-primary btn-md mx-2" @click="openModal((isNew = false), item)">
                 編輯
               </button>
-              <button class="btn btn-outline-danger btn-md mx-2" @click="delModal(item.id)">
+              <button type="button" class="btn btn-outline-danger btn-md mx-2" @click="delModal(item.id)">
                 刪除
               </button>
             </div>
@@ -40,32 +40,32 @@
         </tr>
       </tbody>
     </table>
-    <pagination :pages="pagination" @emit-pages="getProducts"></pagination>
+    <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
   </div>
-  <productModal ref="productModal" :product="tempProduct" @update-product="updateProduct"></productModal>
-  <delModal ref="delModal" @delete-item="deleteProduct"></delModal>
+  <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct"></ProductModal>
+  <DelModal ref="delModal" @delete-item="deleteProduct"></DelModal>
 </template>
 
 <script>
-import loadingCustom from '../../components/front/LoadingCustom.vue'
-import productModal from '../../components/back/ProductModal.vue'
-import delModal from '../../components/back/DelModal.vue'
-import pagination from '../../components/Pagination.vue'
+import LoadingCustom from '@/components/front/LoadingCustom.vue'
+import ProductModal from '@/components/back/ProductModal.vue'
+import DelModal from '@/components/back/DelModal.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   data () {
     return {
-      tempProduct: {}, // 寄放Modal表格中輸入的新增產品或是要編輯產品的資料
-      isNew: false, // 判斷物品是否為新增
-      isDelete: false, // 判斷是否進行刪除
-      deletedID: '' // 寄放欲刪除之物品的id
+      tempProduct: {},
+      isNew: false,
+      isDelete: false,
+      deletedID: ''
     }
   },
   components: {
-    loadingCustom,
-    productModal,
-    delModal,
-    pagination
+    LoadingCustom,
+    ProductModal,
+    DelModal,
+    Pagination
   },
   inject: ['emitter'],
   computed: {
@@ -155,13 +155,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.container{
-  max-width: 1140px;
-}
-@media (max-width:768px) {
-  .container{
-    overflow-x: scroll;
-  }
-}
+<style scoped lang="scss">
+@import "@/assets/viewScss/_forBack";
 </style>
