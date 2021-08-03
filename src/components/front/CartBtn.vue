@@ -34,5 +34,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/componentScss/_cartBtn";
+@import "@/assets/scss/componentScss/_cartBtn";
 </style>

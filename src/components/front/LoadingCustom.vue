@@ -17,5 +17,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/componentScss/_loadingCustom";
+@import "@/assets/scss/componentScss/_loadingCustom";
 </style>

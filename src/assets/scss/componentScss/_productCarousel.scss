@@ -1,0 +1,49 @@
+.mySwiper {
+  max-width: 960px;
+  width: 80%;
+  background-color: #242220;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 250px;
+  height: 80%;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+h2 {
+  text-align: center;
+}
+.cardItem {
+  position: relative;
+  display: inline-block;
+}
+.cardItem .seeMore {
+  visibility: hidden;
+  width: 120px;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 20px;
+  position: absolute;
+  z-index: 1;
+  bottom: 40%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.cardItem:hover .seeMore {
+  visibility: visible;
+  opacity: 1;
+}
+.cardItem img {
+  opacity: 1;
+  transition: opacity 0.4s;
+}
+.cardItem:hover img {
+  opacity: 0.3;
+}

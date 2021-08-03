@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <router-link class="navbar-brand text-center" to="/">
-        <img src="../../assets/pic/BEWDicon2.jpg" alt="" style="height: 50px;" />
+        <img src="../../assets/img/BEWDicon2.jpg" alt="logo" style="height: 50px;" />
         <p class="homeWord">DUELIST</p>
       </router-link>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -107,7 +107,7 @@ export default {
       this.$router.push(`/${link}`)
     },
     isThisPage (link) {
-      return this.$router.currentRoute._value.fullPath === link
+      return this.$route.fullPath === link
     }
   },
   created () {
@@ -121,5 +121,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/viewScss/_userboard";
+@import "@/assets/scss/viewScss/_userboard";
 </style>

@@ -1,0 +1,94 @@
+
+.homeBanner {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../../assets/img/yugioh_1.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.9;
+  background-attachment: fixed;
+  @media (max-width: 600px) {
+    background-image: url("../../assets/img/yugioh_1_small.jpg");
+    // min-height: 75vh;
+  }
+}
+.bannerMessage{
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+.typeAnime {
+  width: 100%;
+  border-right: .05em solid;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 5s steps(10),
+    caret 1s steps(1) infinite;
+}
+.typeItem{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.introdiction{
+  min-height: 100vh;
+  @media (max-width: 768px) {
+    min-height: auto;
+  }
+}
+.aboutUs{
+  background-image: url('../../assets/img/kaibayugi.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+}
+.doYouKnow{
+  background-image: url('../../assets/img/worldwild.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+}
+.cardType{
+  background-color: #B3B6DB;
+  min-height: 45vh;
+  @media (max-width: 768px) {
+    min-height: auto;
+  }
+}
+.cardSection{
+  min-height: 55vh;
+  @media (max-width: 768px) {
+    min-height: auto;
+  }
+}
+.animated {
+  opacity: 0;
+  transition: all 1.5s;
+  transform: translateY(100px);
+}
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+.btnCustom{
+  border: 1px solid #B3B6DB;
+  color: #B3B6DB;
+  font-size: 25px;
+  font-weight: bolder;
+  &:hover{
+    background-color: #B3B6DB;
+    color: #242220;
+  }
+}
+@keyframes typing {
+  from { width: 0 }
+}
+@keyframes caret {
+  50% { border-color: transparent; }
+}

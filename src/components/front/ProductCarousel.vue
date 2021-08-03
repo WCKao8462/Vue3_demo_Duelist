@@ -17,7 +17,7 @@
     <SwiperSlide v-for="item in randomProducts" :key="item.id">
       <a type="button" class="nav-link" @click="toProduct(item.id)">
         <div class="cardItem m-0">
-          <img :src="item.imageUrl" />
+          <img :src="item.imageUrl" :alt="item.title" />
           <div class="seeMore">查看更多<br>More</div>
         </div>
       </a>
@@ -82,5 +82,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/componentScss/_productCarousel";
+@import "@/assets/scss/componentScss/_productCarousel";
 </style>

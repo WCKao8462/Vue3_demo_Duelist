@@ -9,7 +9,7 @@
             全部<br />
             All
           </li>
-          <li type="button" class="btnTtem my-3"  @click="setCard('怪獸', '怪獸卡')" :class="{'active': typeName === '怪獸卡'}">
+          <li type="button" class="btnTtem my-3" @click="setCard('怪獸', '怪獸卡')" :class="{'active': typeName === '怪獸卡'}">
             怪獸卡<br />
             Monster Card
           </li>
@@ -23,12 +23,12 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-9 pt-3  m-auto">
+      <div class="col-md-9 pt-3 m-auto">
         <h2 class="text-white text-center">{{ typeName }}</h2>
         <div class="row mb-5">
           <div class="col-lg-4 col-md-6 p-3" v-for="item in filterSearch" :key="item.id">
-            <div class="card h-100 productAnimated" >
-              <button type="button" class="cardImg" :style="{ backgroundImage: `url(${item.imageUrl})` }"  @click="toProductDetail(item.id)"></button>
+            <div class="card h-100 productAnimated">
+              <button type="button" class="cardImg" :style="{ backgroundImage: `url(${item.imageUrl})` }" @click="toProductDetail(item.id)"></button>
               <div class="card-body">
                 <div class="py-2 h4 text-center fw-bolder">{{ item.title }}</div>
                 <div
@@ -44,7 +44,7 @@
                   <del class="h6">$ {{ item.origin_price }}</del>
                   <div class="h5 fw-bolder">$ {{ item.price }}</div>
                 </div>
-                <button type="button" class="btn btn-md ml-auto w-100 border border-1 btnCustom" @click="addCart(item.id)" :disabled="status.loadingItem === item.id">
+                <button type="button" class="btn btn-md ml-auto w-100 border border-1 btnCustom" @click="addCart(item.id, item.title)" :disabled="status.loadingItem === item.id">
                   <div class="spinner-grow spinner-grow-sm text-danger" role="status" v-if="status.loadingItem === item.id">
                     <span class="visually-hidden">Loading...</span>
                   </div>
@@ -87,7 +87,6 @@ export default {
     CartBtn,
     Pagination
   },
-  inject: ['emitter'],
   methods: {
     getProducts () {
       this.$store.dispatch('getProducts')
@@ -103,25 +102,15 @@ export default {
       this.$router.push(`/product/${id}`)
       document.documentElement.scrollTop = 0
     },
-    addCart (id) {
-      this.$store.dispatch('updateLoading', true)
-      this.status.loadingItem = id
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`
-      const cart = {
-        product_id: id,
-        qty: this.qty
+    addCart (cardID, cardTitle, cartQty = 1) {
+      this.status.loadingItem = cardID
+      const obj = {
+        id: cardID,
+        title: cardTitle,
+        qty: cartQty
       }
-      this.$http.post(url, { data: cart }).then((res) => {
-        if (res.data.success) {
-          this.status.loadingItem = ''
-          this.emitter.emit('push-message', {
-            style: 'secondary',
-            title: '已將卡片加入牌組'
-          })
-          this.$store.dispatch('getCart')
-          this.$store.dispatch('updateLoading', false)
-        }
-      })
+      this.$store.dispatch('addCart', obj)
+      this.status.loadingItem = ''
     },
     setCard (cardName, typeName) {
       this.getProducts()
@@ -152,5 +141,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/viewScss/_userProduct";
+@import "@/assets/scss/viewScss/_userProduct";
 </style>

@@ -1,0 +1,15 @@
+.modal-content {
+  background-color: #242220;
+  border: 2px solid #b3b6db;
+  border-radius: 5px;
+}
+.btnCustom {
+  background-color: #b3b6db;
+  color: #242220;
+  font-weight: bolder;
+  font-size: 25px;
+  &:hover {
+    background-color: #6670b7;
+    color: #fff;
+  }
+}

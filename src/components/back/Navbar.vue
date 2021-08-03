@@ -4,13 +4,19 @@
       <button type="button" class="navbar-toggler mb-3" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand">後臺管理員</a>
+      <h4 class="text-dark p-3 bg-white fw-bolder">後臺管理員</h4>
       <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-        <div class="navbar-nav ms-4 me-auto">
-          <router-link class="nav-link py-3 px-2" to="/dashboard/products">產品列表</router-link>
-          <router-link class="nav-link py-3 px-2" to="/dashboard/coupons">優惠券</router-link>
-          <router-link class="nav-link py-3 px-2" to="/dashboard/orders">訂單</router-link>
-        </div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li type="button" class="nav-item navbar-brand m-2 p-3 fw-bolder rounded-pill" :class="{'active': isThisPage('/dashboard/products')}" @click="toPage('products')">
+            產品列表
+          </li>
+          <li type="button" class="nav-item navbar-brand m-2 p-3 fw-bolder rounded-pill" :class="{'active': isThisPage('/dashboard/coupons')}" @click="toPage('coupons')">
+            優惠券
+          </li>
+          <li type="button" class="nav-item navbar-brand m-2 p-3 fw-bolder rounded-pill" :class="{'active': isThisPage('/dashboard/orders')}" @click="toPage('orders')">
+            訂單
+          </li>
+        </ul>
         <div class="navbar-nav ms-4">
           <a class="nav-link py-3 px-2" href="#" @click.prevent="logOut">登出</a>
         </div>
@@ -33,10 +39,19 @@ export default {
       const api = `${process.env.VUE_APP_API}/logout`
       this.$http.post(api, this.user).then((res) => {
         if (res.data.success) {
-          alert('登出成功')
           this.$router.push('/login')
+          this.$store.dispatch('receiveMessage', {
+            style: 'success',
+            title: '登出成功'
+          })
         }
       })
+    },
+    toPage (link) {
+      this.$router.push(`/dashboard/${link}`)
+    },
+    isThisPage (link) {
+      return this.$route.fullPath === link
     }
   },
   mounted () {
@@ -44,3 +59,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.active{
+  background-color: #B3B6DB;
+  color: #000;
+}
+</style>

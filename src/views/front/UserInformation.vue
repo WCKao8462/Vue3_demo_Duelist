@@ -14,30 +14,30 @@
     </div>
     <div class="row">
       <div class="buyer p-3">
-              <h3 class="text-center text-white">商品明細</h3>
-              <br>
-              <table class="table text-white text-center">
-                <thead class="mb-4 p-2 bg-primary text-dark fs-5">
-                  <th class="fw-bolder p-2">品名</th>
-                  <th class="fw-bolder p-2">數量</th>
-                  <th class="fw-bolder p-2">價格</th>
-                </thead>
-                <tbody>
-                  <tr v-for="item in carts" :key="item.id">
-                    <td>{{ item.product.title}}</td>
-                    <td>{{ item.qty}}</td>
-                    <td>{{ item.final_total}}</td>
-                  </tr>
-                </tbody>
-                <br>
-                <tfoot>
-                  <tr>
-                    <td colspan="2" class="text-center h4 p-2">總計</td>
-                    <td class="text-center h4 p-2">${{cart.final_total}}</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
+        <h3 class="text-center text-white">商品明細</h3>
+        <br />
+        <table class="table text-white text-center">
+          <thead class="mb-4 p-2 bg-primary text-dark fs-5">
+            <th class="fw-bolder p-2">品名</th>
+            <th class="fw-bolder p-2">數量</th>
+            <th class="fw-bolder p-2">價格</th>
+          </thead>
+          <tbody>
+            <tr v-for="item in carts" :key="item.id">
+              <td>{{ item.product.title}}</td>
+              <td>{{ item.qty}}</td>
+              <td>{{ item.final_total}}</td>
+            </tr>
+          </tbody>
+          <br />
+          <tfoot>
+            <tr>
+              <td colspan="2" class="text-center h4 p-2">總計</td>
+              <td class="text-center h4 p-2">${{cart.final_total}}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
       <div class="text-white ps-5 pe-5 mx-auto mt-5" style="max-width: 800px;">
         <vform class="mt-3" v-slot="{ errors }" @submit="createdOrder">
           <h3 class="text-center">聯絡人資訊</h3>
@@ -45,28 +45,28 @@
             <label for="useremail"><i class="bi bi-envelope-fill"></i> 電子郵件 (*必填)</label>
             <vfield type="email" class="form-control" name="email" id="useremail" placeholder="請輸入 Email" rules="email|required" :class="{'is-invalid': errors.email}" v-model="form.user.email"></vfield>
             <error-message class="text-danger" name="email">
-              <p class="text-danger"><i class="bi bi-exclamation-circle-fill"></i>電子郵件格式不符</p>
+              <p class="text-warning"><i class="bi bi-exclamation-circle-fill"></i> 電子郵件格式不符</p>
             </error-message>
           </div>
           <div class="form-group my-2">
             <label for="username"><i class="bi bi-person-fill"></i> 收件人姓名 (*必填)</label>
             <vfield type="text" class="form-control" name="name" id="username" placeholder="輸入姓名" :rules="isRequired" v-model="form.user.name"></vfield>
             <error-message class="text-danger" name="name">
-              <p class="text-danger"><i class="bi bi-exclamation-circle-fill"></i>姓名欄位不得為空</p>
+              <p class="text-warning"><i class="bi bi-exclamation-circle-fill"></i> 姓名欄位不得為空</p>
             </error-message>
           </div>
           <div class="form-group my-2">
             <label for="userphone"><i class="bi bi-telephone-fill"></i> 收件人電話 (*必填)</label>
             <vfield type="tel" class="form-control" name="tel" id="tel" placeholder="請輸入電話" :rules="isPhone" v-model="form.user.tel"></vfield>
             <error-message class="text-danger" name="tel">
-              <p class="text-danger"><i class="bi bi-exclamation-circle-fill"></i>需要正確的電話號碼</p>
+              <p class="text-warning"><i class="bi bi-exclamation-circle-fill"></i> 需要正確的電話號碼</p>
             </error-message>
           </div>
           <div class="form-group my-2">
             <label for="useraddress"><i class="bi bi-house-door-fill"></i> 收件人地址 (*必填)</label>
             <vfield type="text" class="form-control" name="address" id="useraddress" placeholder="請輸入地址" :rules="isRequired" v-model="form.user.address"></vfield>
             <error-message class="text-danger" name="address">
-              <p class="text-danger"><i class="bi bi-exclamation-circle-fill"></i>地址欄位不得為空</p>
+              <p class="text-warning"><i class="bi bi-exclamation-circle-fill"></i> 地址欄位不得為空</p>
             </error-message>
           </div>
           <div class="form-group">
@@ -75,7 +75,7 @@
           </div>
           <br />
           <div class="d-flex justify-content-between px-5">
-            <button type="button" class="btn btn-outline-light btn-lg me-3 fs-4" @click="toPrevious"><i class="bi bi-arrow-left-square-fill"></i> 回上一頁</button>
+            <button type="button" class="btn btn-outline-light btn-lg me-3 fs-4 border-5 fw-bolder" @click="toPrevious"><i class="bi bi-arrow-left-square-fill"></i> 回上一頁</button>
             <button type="submit" class="btn btnCustom btn-lg">送出訂單 <i class="bi bi-arrow-right-square-fill"></i></button>
           </div>
         </vform>
@@ -152,5 +152,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/viewScss/_userInformation";
+@import "@/assets/scss/viewScss/_userInformation";
 </style>

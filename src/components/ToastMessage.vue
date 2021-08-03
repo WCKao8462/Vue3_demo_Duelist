@@ -16,12 +16,16 @@ export default {
       messages: []
     }
   },
-  inject: ['emitter'],
-  mounted () {
-    this.emitter.on('push-message', (message) => {
-      const { style = 'success', title, content } = message
+  computed: {
+    message () {
+      return this.$store.state.message
+    }
+  },
+  watch: {
+    message () {
+      const { style, title, content } = this.message
       this.messages.push({ style, title, content })
-    })
+    }
   }
 }
 </script>

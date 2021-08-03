@@ -19,7 +19,7 @@
             <tbody>
               <tr v-for="item in cart.carts" :key="item.id" class="row">
                 <td class="align-middle col-2">
-                  <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCart(item.id)">
+                  <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCart(item.id, item.product.title)">
                     <i class="bi bi-trash-fill"></i>
                   </button>
                 </td>
@@ -71,8 +71,12 @@ export default {
     }
   },
   methods: {
-    removeCart (id) {
-      this.$store.dispatch('removeCart', id)
+    removeCart (cardID, cardTitle) {
+      const obj = {
+        id: cardID,
+        title: cardTitle
+      }
+      this.$store.dispatch('removeCart', obj)
     },
     toOrder () {
       this.$router.push('/order')
@@ -82,5 +86,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/componentScss/_cartModal";
+@import "@/assets/scss/componentScss/_cartModal";
 </style>

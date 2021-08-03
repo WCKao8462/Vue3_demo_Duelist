@@ -8,18 +8,12 @@
 
 <script>
 import Navbar from '@/components/back/Navbar.vue'
-import emitter from '@/methods/emitter'
 import ToastMessage from '@/components/ToastMessage.vue'
 
 export default {
   components: {
     Navbar,
     ToastMessage
-  },
-  provide () {
-    return {
-      emitter
-    }
   },
   created () {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
@@ -35,5 +29,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/viewScss/_forBack";
+@import "@/assets/scss/viewScss/_forBack";
 </style>

@@ -1,6 +1,6 @@
 <template>
   <LoadingCustom :tempIsLoading="isLoading"></LoadingCustom>
-  <div class="text-end mt-3">
+  <div class="text-end">
     <button type="button" class="btn btn-primary" @click="openModal((isNew = true))">
       增加產品
     </button>
@@ -67,7 +67,6 @@ export default {
     DelModal,
     Pagination
   },
-  inject: ['emitter'],
   computed: {
     isLoading () {
       return this.$store.state.isLoading
@@ -113,17 +112,19 @@ export default {
         this.getProducts()
         if (res.data.success) {
           this.getProducts()
-          this.emitter.emit('push-message', {
+          this.$store.dispatch('receiveMessage', {
             style: 'success',
-            title: '更新成功'
+            title: this.tempProduct.title,
+            content: res.data.message
           })
         } else {
-          this.emitter.emit('push-message', {
+          this.$store.dispatch('receiveMessage', {
             style: 'danger',
             title: '更新失敗',
-            content: res.data.message.join('、')
+            content: res.data.message
           })
         }
+        this.tempProduct = {}
         this.$store.dispatch('updateLoading', false)
       })
     },
@@ -139,9 +140,10 @@ export default {
             this.isDelete = false
             this.deletedID = ''
             this.getProducts()
-            this.emitter.emit('push-message', {
+            this.$store.dispatch('receiveMessage', {
               style: 'success',
-              title: '刪除成功'
+              title: '刪除成功',
+              content: res.data.message
             })
           }
         })
@@ -156,5 +158,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/viewScss/_forBack";
+@import "@/assets/scss/viewScss/_forBack";
 </style>

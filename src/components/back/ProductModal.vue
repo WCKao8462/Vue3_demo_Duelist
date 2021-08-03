@@ -22,8 +22,7 @@
                 </label>
                 <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile" />
               </div>
-              <img class="img-fluid" alt="" :src="tempProduct.imageUrl" />
-              <!-- 延伸技巧，多圖 -->
+              <img class="img-fluid" :alt="tempProduct.title" :src="tempProduct.imageUrl" />
               <div class="mt-5">
                 <div class="mb-3 input-group">
                   <input type="url" class="form-control form-control" placeholder="請輸入連結" />

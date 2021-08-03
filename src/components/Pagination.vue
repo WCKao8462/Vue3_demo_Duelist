@@ -30,5 +30,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/componentScss/_pagination";
+@import "@/assets/scss/componentScss/_pagination";
 </style>

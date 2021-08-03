@@ -66,7 +66,6 @@ export default {
     DelModal,
     Pagination
   },
-  inject: ['emitter'],
   computed: {
     isLoading () {
       return this.$store.state.isLoading
@@ -83,8 +82,8 @@ export default {
       this.$store.dispatch('getOrdersAdmin', page)
     },
     dateTransform (time) {
-      const d = new Date(time * 1000).toLocaleString()
-      return d
+      const dueDate = new Date(time * 1000).toLocaleString()
+      return dueDate
     },
     openModal (item) {
       this.tempOrder = { ...item }
@@ -107,9 +106,10 @@ export default {
           this.isDelete = false
           this.deletedID = ''
           this.getOrders()
-          this.emitter.emit('push-message', {
+          this.$store.dispatch('receiveMessage', {
             style: 'success',
-            title: '刪除成功'
+            title: '刪除成功',
+            content: res.data.message
           })
         })
       }
@@ -123,5 +123,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/viewScss/_forBack";
+@import "@/assets/scss/viewScss/_forBack";
 </style>
