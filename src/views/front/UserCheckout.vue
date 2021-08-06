@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="text-center mt-3">
-        <button type="submit" class="btn btnCustom btn-lg" v-if="order.is_paid === false">確認付款去 <i class="bi bi-arrow-right-square-fill"></i></button>
+        <button type="submit" class="btn btnCustom fs-4 fw-bolder border-5 btn-lg" v-if="order.is_paid === false">確認付款去 <i class="bi bi-arrow-right-square-fill"></i></button>
       </div>
     </form>
   </div>
@@ -102,10 +102,6 @@
 import LoadingCustom from '@/components/front/LoadingCustom.vue'
 
 export default {
-  data () {
-    return {
-    }
-  },
   components: {
     LoadingCustom
   },

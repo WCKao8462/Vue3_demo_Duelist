@@ -42,10 +42,10 @@
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-between px-5 mt-4">
-        <button type="button" class="btn btn-outline-light btn-lg me-3 fs-4 border-5 fw-bolder" @click="toProducts"><i class="bi bi-arrow-left-square-fill"></i> 繼續選購</button>
-        <button type="button" class="btn btnCustom btn-lg ps-3" @click="toUserInformation">確認訂單 <i class="bi bi-arrow-right-square-fill"></i></button>
-      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 text-center"><button type="button" class="btn btn-outline-light btn-lg fs-4 border-5 fw-bolder my-2" @click="toProducts"><i class="bi bi-arrow-left-square-fill"></i> 繼續選購</button></div>
+      <div class="col-sm-6 text-center"><button type="button" class="btn btnCustom fs-4 fw-bolder border-5 btn-lg my-2" @click="toUserInformation">確認訂單 <i class="bi bi-arrow-right-square-fill"></i></button></div>
     </div>
   </div>
   <section v-else>

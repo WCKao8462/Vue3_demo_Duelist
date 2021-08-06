@@ -1,7 +1,7 @@
 <template>
   <CartBtn></CartBtn>
   <div class="homeBanner position-relative">
-    <div class="bannerMessage text-white" style="position: absolute; top: 50%; left: 20%;">
+    <div class="bannerMessage text-white">
       <p class="h3">
         賭上決鬥者的靈魂<br />
         我相信我的牌組
@@ -107,11 +107,11 @@ export default {
     }
   },
   created () {
-    $(document).ready(function () {
+    $(document).ready(() => {
       let bannerHeight = 0
       bannerHeight = $('.homeBanner').outerHeight() - 116
       $('.homeBanner').css('min-height', bannerHeight)
-      $(window).scroll(function () {
+      $(window).scroll(() => {
         const scrollPos = $(window).scrollTop()
         const windowHeight = $(window).height()
         $('.animated').each(function () {

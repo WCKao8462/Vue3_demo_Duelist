@@ -55,10 +55,10 @@
         <div class="col-sm m-auto">
           <ul class="d-flex flex-column justify-content-center fw-bold">
             <li>
-              <i class="bi bi-telephone-fill"></i> 電話 : 0912345678
+              <i class="bi bi-telephone-fill"></i> 電話 : <a class="text-dark" href="tel:0912345678">0912345678</a>
             </li>
             <li>
-              <i class="bi bi-envelope-fill"></i> 信箱 : duelist@mail.com.tw
+              <i class="bi bi-envelope-fill"></i> 信箱 : <a class="text-dark" href="mailto:duelist@mail.com.tw">duelist@mail.com.tw</a>
             </li>
           </ul>
         </div>
@@ -69,7 +69,6 @@
 
 <script>
 import Collapse from 'bootstrap/js/dist/collapse'
-import emitter from '@/methods/emitter'
 import ToastMessage from '@/components/ToastMessage.vue'
 
 export default {
@@ -81,11 +80,6 @@ export default {
   },
   components: {
     ToastMessage
-  },
-  provide () {
-    return {
-      emitter
-    }
   },
   methods: {
     toOrderList (id) {
@@ -105,6 +99,8 @@ export default {
     },
     toPage (link) {
       this.$router.push(`/${link}`)
+      const toggleDispear = document.getElementById('navbarSupportedContent')
+      toggleDispear.classList.remove('show')
     },
     isThisPage (link) {
       return this.$route.fullPath === link

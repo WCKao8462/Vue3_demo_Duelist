@@ -5,7 +5,7 @@
       增加優惠券
     </button>
   </div>
-  <div class="container">
+  <div class="container my-3">
     <table class="table mt-4 text-white m-auto text-center mb-5" style="min-width: 800px;">
       <thead>
         <tr class="fs-5">

@@ -49,6 +49,8 @@ export default {
     },
     toPage (link) {
       this.$router.push(`/dashboard/${link}`)
+      const toggleDispear = document.getElementById('navbarNavAltMarkup')
+      toggleDispear.classList.remove('show')
     },
     isThisPage (link) {
       return this.$route.fullPath === link

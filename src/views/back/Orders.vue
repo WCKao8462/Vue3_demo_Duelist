@@ -1,6 +1,6 @@
 <template>
   <LoadingCustom :tempIsLoading="isLoading"></LoadingCustom>
-  <div class="container">
+  <div class="container my-3">
     <table class="table mt-4 text-white m-auto mb-5 text-center" style="min-width: 800px;">
       <thead>
         <tr class="fs-5 text-info py-4">
